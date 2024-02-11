@@ -14,7 +14,7 @@ export const listarVariedadCultivo = async (req, res) => {
         }
     } catch (error) {
         res.status(500).json({
-            "Mensaje": error
+            "Mensaje": "error en el sistema"
         })
     }
 }
@@ -40,7 +40,7 @@ export const RegistrarVariedadCultivo = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status:500,
-            message:error
+            message:"error en el sistema"
         })
     }
 }
@@ -66,7 +66,7 @@ export const ActualizarVariedadCultivo = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: error
+            message: "error en el sistema"
         });
     }
 }      
@@ -91,7 +91,7 @@ export const DesactivarVariedadCultivo = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: error
+            message: "error en el sistema"
         });
     }
 }
@@ -113,7 +113,7 @@ export const BuscarVariedadCultivo = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: error
+            message: "error en el sistema"
         });
     }
 }
