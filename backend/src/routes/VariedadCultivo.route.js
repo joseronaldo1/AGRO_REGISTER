@@ -9,8 +9,8 @@ const rutaDeVariedadCultivo = Router()
 //localhost:4000/VariedadCultivo
 rutaDeVariedadCultivo.get("/listarcultivo", listarVariedadCultivo)
 rutaDeVariedadCultivo.post("/registrarcultivo", RegistrarVariedadCultivo)
-rutaDeVariedadCultivo.put("/actualizarCultivo", ActualizarVariedadCultivo)
+rutaDeVariedadCultivo.put("/actualizarCultivo/:id", ActualizarVariedadCultivo)
 rutaDeVariedadCultivo.delete("/desactivarActividad", DesactivarVariedadCultivo);
-rutaDeVariedadCultivo.get("/buscarActividad", BuscarVariedadCultivo);
+rutaDeVariedadCultivo.get("/buscarActividad/:id", BuscarVariedadCultivo);
 
 export { rutaDeVariedadCultivo }; // Exporta la constante utilizando la sintaxis de exportación nombrada
