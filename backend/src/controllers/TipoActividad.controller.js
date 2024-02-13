@@ -4,8 +4,17 @@ import { pool } from "../database/conexion.js";
 export const RegistrarTipoActividad = async (req, res) => {
     try {
         const { nombre } = req.body;
-        const [result] = await pool.query("INSERT INTO tipo_actividad (nombre) VALUES (?)", [nombre]);
 
+        // Validar que nombre esté presente en el cuerpo de la solicitud
+        if (!nombre) {
+            return res.status(400).json({
+                status: 400,
+                message: 'El campo nombre es requerido'
+            });
+        }
+
+        const [result] = await pool.query("INSERT INTO tipo_actividad (nombre) VALUES (?)", [nombre]);
+        
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
@@ -21,10 +30,17 @@ export const RegistrarTipoActividad = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: error.message
+            message: error.message || 'Ha ocurrido un error al procesar la solicitud'
         });
     }
 }
+
+
+
+
+
+
+
 
 // CRUD - Listar
 export const listarTipoActividad = async (req, res) => {
@@ -40,16 +56,26 @@ export const listarTipoActividad = async (req, res) => {
         }
     } catch (error) {
         res.status(500).json({
-            message: error.message
+            message: "error en el sistema"
         });
     }
 }
 
+
 // CRUD - Actualizar
-export const actualizarTipoActividad = async (req, res) => {
+    export const actualizarTipoActividad = async (req, res) => {
         try {
-            const { id_tipo_actividad, nombre } = req.body;
-            const [result] = await pool.query("UPDATE tipo_actividad SET nombre = ? WHERE id_tipo_actividad = ?", [nombre, id_tipo_actividad]);
+            const { id } = req.params;
+            const { nombre } = req.body;
+    
+            console.log("Consulta SQL:", `SELECT * FROM tipo_actividad WHERE id_tipo_actividad=${id}`);
+    
+            const [oldTipoActividad] = await pool.query("SELECT * FROM tipo_actividad WHERE id_tipo_actividad=?", [id]);
+    
+            
+    
+            const [result] = await pool.query(
+                `UPDATE tipo_actividad SET nombre = ${nombre ? `'${nombre}'` : `'${oldTipoActividad[0].nombre}'`} WHERE id_tipo_actividad = ?`,[id]);
     
             if (result.affectedRows > 0) {
                 res.status(200).json({
@@ -64,12 +90,25 @@ export const actualizarTipoActividad = async (req, res) => {
                 });
             }
         } catch (error) {
+            console.error("Error en la función Actualizar:", error);  
             res.status(500).json({
                 status: 500,
-                message: error.message
+                message: error.message || "error en el sistema"
             });
         }
-    }
+    };
+    
+    
+
+
+
+
+
+
+
+
+
+
 
 // CRUD - Desactivar
 export const desactivarTipoActividad = async (req, res) => {
@@ -92,7 +131,7 @@ export const desactivarTipoActividad = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: error.message
+            message: "error en el sistema"
         });
     }
 }
@@ -101,9 +140,9 @@ export const desactivarTipoActividad = async (req, res) => {
 // CRUD -buscar
 export const buscarTipoActividad = async (req, res) => {
     try {
-        const { nombre } = req.body;
-        const [result] = await pool.query("SELECT * FROM tipo_actividad WHERE nombre LIKE ?", [`%${nombre}%`]);
-
+        const { id } = req.params;
+        const [result] = await pool.query("SELECT * FROM tipo_actividad WHERE id_tipo_actividad=?", [id]);
+                    
         if (result.length > 0) {
             res.status(200).json(result);
         } else {
@@ -115,7 +154,7 @@ export const buscarTipoActividad = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: error.message
+            message: "error en el sistema"
         });
     }
 }

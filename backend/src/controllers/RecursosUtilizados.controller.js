@@ -4,8 +4,17 @@ import { pool } from "../database/conexion.js";
 export const RegistrarRecursosUtilizados = async (req, res) => {
     try {
         const { cantidad } = req.body;
-        const [result] = await pool.query("INSERT INTO recursos_utilizados (cantidad) VALUES (?)", [cantidad]);
 
+        // Validar que cantidad esté presente en el cuerpo de la solicitud
+        if (!cantidad) {
+            return res.status(400).json({
+                status: 400,
+                message: 'El campo cantidad es requerido'
+            });
+        }
+
+        const [result] = await pool.query("INSERT INTO recursos_utilizados (cantidad) VALUES (?)", [cantidad]);
+        
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
@@ -21,10 +30,20 @@ export const RegistrarRecursosUtilizados = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: error.message
+            message: error.message || 'Ha ocurrido un error al procesar la solicitud'
         });
     }
 }
+
+
+
+
+
+
+
+
+
+
 
 // CRUD - Listar
 export const listarRecursosUtilizados = async (req, res) => {
@@ -40,7 +59,7 @@ export const listarRecursosUtilizados = async (req, res) => {
         }
     } catch (error) {
         res.status(500).json({
-            message: error.message
+            message: "error en el sistema"
         });
     }
 }
@@ -50,8 +69,17 @@ export const listarRecursosUtilizados = async (req, res) => {
 // CRUD - Actualizar
 export const actualizarRecursosUtilizados = async (req, res) => {
     try {
-        const { id_recursos_utilizados, cantidad } = req.body;
-        const [result] = await pool.query("UPDATE recursos_utilizados SET cantidad = ? WHERE id_recursos_utilizados = ?", [cantidad, id_recursos_utilizados]);
+        const { id } = req.params;
+        const { cantidad } = req.body;
+
+        console.log("Consulta SQL:", `SELECT * FROM recursos_utilizados WHERE id_recursos_utilizados=${id}`);
+
+        const [oldTipoRecurso] = await pool.query("SELECT * FROM recursos_utilizados WHERE id_recursos_utilizados=?", [id]);
+
+        
+
+        const [result] = await pool.query(
+            `UPDATE recursos_utilizados SET cantidad = ${cantidad ? `'${cantidad}'` : `'${oldTipoRecurso[0].cantidad}'`} WHERE id_recursos_utilizados = ?`,[id]);
 
         if (result.affectedRows > 0) {
             res.status(200).json({
@@ -66,19 +94,41 @@ export const actualizarRecursosUtilizados = async (req, res) => {
             });
         }
     } catch (error) {
+        console.error("Error en la función Actualizar:", error);  
         res.status(500).json({
             status: 500,
-            message: error.message
+            message: error.message || "error en el sistema"
         });
     }
-}
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // CRUD - Desactivar
 export const desactivarRecursosUtilizados = async (req, res) => {
     try {
-        const { cantidad } = req.body; 
-        const [result] = await pool.query("DELETE FROM recursos_utilizados WHERE cantidad = ?", [cantidad]); 
+        const { id_recursos_utilizados } = req.body; 
+        const [result] = await pool.query("DELETE FROM recursos_utilizados WHERE id_recursos_utilizados = ?", [id_recursos_utilizados]); 
 
         if (result.affectedRows > 0) {
             res.status(200).json({
@@ -95,18 +145,19 @@ export const desactivarRecursosUtilizados = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: error.message
+            message: "error en el sistema"
         });
     }
 }
 
 
+
 // CRUD -buscar
 export const buscarRecursosUtilizados = async (req, res) => {
     try {
-        const { cantidad } = req.body;
-        const [result] = await pool.query("SELECT * FROM recursos_utilizados WHERE cantidad LIKE ?", [`%${cantidad}%`]);
-
+        const { id } = req.params;
+        const [result] = await pool.query("SELECT * FROM recursos_utilizados WHERE id_recursos_utilizados=?", [id]);
+                    
         if (result.length > 0) {
             res.status(200).json(result);
         } else {
@@ -118,7 +169,9 @@ export const buscarRecursosUtilizados = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: error.message
+            message: "error en el sistema"
         });
     }
 }
+
+    
