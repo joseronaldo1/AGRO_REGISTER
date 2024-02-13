@@ -1,3 +1,4 @@
+import { json } from "express";
 import { pool } from "../database/conexion.js";
 
 // CRUD - Listar
@@ -111,7 +112,7 @@ export const eliminarAsignacion = async (req, res) => {
 // CRUD - Buscar
 export const buscarAsignacion = async (req, res) => {
   try {
-    const { fecha_asignacion } = req.body;
+    const { fecha_asignacion } = req.params;
     const [result] = await pool.query(
       "SELECT * FROM asignaciones WHERE fecha_asignacion LIKE ?",
       [`%${fecha_asignacion}%`]
@@ -129,6 +130,43 @@ export const buscarAsignacion = async (req, res) => {
     res.status(500).json({
       status: 500,
       message: error,
+    });
+  }
+};
+
+//cur - Actualizar
+export const Actualizar = async (req, res) => {
+  try {
+    const { id_asignacion } = req.params;
+    const { fecha_asignacion, estado } = req.body;
+
+    console.log(`Id de la asignación: ${id_asignacion}`);
+
+    const [oldAsignacion] = await pool.query("SELECT * FROM Asignacion WHERE id_asignacion=?", [id_asignacion]);
+    console.log("Resultado:", oldAsignacion);
+
+    const [respuesta] = await pool.query(
+      `UPDATE Asignacion SET fecha_asignacion = ${fecha_asignacion ? `'${fecha_asignacion}'` : `'${oldAsignacion[0].fecha_asignacion}'`}, estado = ${estado ? `'${estado}'` : `'${oldAsignacion[0].estado}'`}
+      WHERE id_asignacion = ?`,
+      [id_asignacion]
+    );
+
+    if (respuesta.affectedRows > 0) {
+      res.status(200).json({
+        status: 200,
+        message: "Actualización exitosa",
+        respuesta: respuesta
+      });
+    } else {
+      res.status(404).json({
+        status: 404,
+        message: "No se encontraron resultados para la actualización"
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      message: error.message
     });
   }
 };
