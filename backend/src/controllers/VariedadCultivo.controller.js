@@ -21,35 +21,51 @@ export const listarVariedadCultivo = async (req, res) => {
 //crud Registrar
 export const RegistrarVariedadCultivo = async (req, res) => {
     try {
-        const {  nombre_variedad } = req.body
-        const [result] = await pool.query("INSERT INTO variedad_cultivo (nombre_variedad) VALUES (? )", [nombre_variedad])
-        
+        const { nombre_variedad } = req.body;
 
-        if (result.affectedRows > 0 ) {
+        if (!nombre_variedad) {
+            return res.status(400).json({
+                status: 400,
+                message: 'El campo nombre_variedad es requerido'
+            });
+        }
+
+        const [result] = await pool.query("INSERT INTO variedad_cultivo (nombre_variedad) VALUES (?)", [nombre_variedad]);
+        
+        if (result.affectedRows > 0) {
             res.status(200).json({
-                status:(200),
-                message:'se registro la Variedad con exito ',
-                result:result
-            })
+                status: 200,
+                message: 'Se registró la Variedad con éxito',
+                result: result // Mostrar el objeto result completo
+            });
         } else {
             res.status(403).json({
-                status:(403),
-                message:'no se registro la Variedad',
-            })
+                status: 403,
+                message: 'No se registró la Variedad',
+            });
         }
     } catch (error) {
         res.status(500).json({
-            status:500,
-            message:"error en el sistema"
-        })
+            status: 500,
+            message: error.message || 'error en el sistema'
+        });
     }
 }
 
 //actualizar
 export const ActualizarVariedadCultivo = async (req, res) => {
     try {
-        const { id_variedad_cultivo, nombre_variedad } = req.body;
-        const [result] = await pool.query("UPDATE variedad_cultivo SET nombre_variedad = ? WHERE id_variedad_cultivo = ?", [ nombre_variedad, id_variedad_cultivo]);
+        const { id } = req.params;
+        const { nombre_variedad} = req.body;
+
+
+        const [oldVCultivo] = await pool.query("SELECT * FROM variedad_cultivo WHERE id_variedad_cultivo=?", [id]);
+
+        
+
+        const [result] = await pool.query(
+            `UPDATE variedad_cultivo SET nombre_variedad = ${nombre_variedad ? `'${nombre_variedad}'` : `'${oldVCultivo[0].nombre_variedad}'`} WHERE id_variedad_cultivo = ?`,[id]
+        );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
@@ -64,12 +80,13 @@ export const ActualizarVariedadCultivo = async (req, res) => {
             });
         }
     } catch (error) {
+        console.error("Error en la función Actualizar:", error);  // Agrega este log
         res.status(500).json({
             status: 500,
-            message: "error en el sistema"
+            message: error.message || "error en el sistema"
         });
     }
-}      
+};
 //CRUD - Desactivar
 export const DesactivarVariedadCultivo = async (req, res) => {
     try {
@@ -91,7 +108,7 @@ export const DesactivarVariedadCultivo = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: "error en el sistema"
+            message: "error en el sistema."
         });
     }
 }
@@ -99,9 +116,9 @@ export const DesactivarVariedadCultivo = async (req, res) => {
 // CRUD - Buscar
 export const BuscarVariedadCultivo = async (req, res) => {
     try {
-        const { nombre_variedad } = req.body;
-        const [result] = await pool.query("SELECT * FROM variedad_cultivo WHERE nombre_variedad LIKE ?", [`%${nombre_variedad}%`]);
-
+        const { id } = req.params;
+        const [result] = await pool.query("SELECT * FROM variedad_cultivo WHERE id_variedad_cultivo=?", [id]);
+                    
         if (result.length > 0) {
             res.status(200).json(result);
         } else {
