@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Documentacion</title>
+</head>
+<body>
+    <h1>Documentación de la API TIPO-ACTIVIDAD</h1>
+    <hr>
+    <h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR TIPO-ACTIVIDAD</h3>
+    <table>
+        <tr><td>Número</td> <td>1</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Tipo Actividad</td></tr>
+        <tr><td>URL</td>  <td>/registrarActividad</td></tr>
+        <tr><td>Descripción</td>  <td>Permite registrar un nuevo tipo de actividad en la base de datos</td></tr>
+        <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
+        <tr><td>Header</td>  <td>Null</td></tr>
+        <tr><td>Request json</td>  <td>{"nombre":"Abonar"}</td></tr>
+        <tr><td>Respuesta json</td>  <td>	
+        Correcto: 
+        Status: 200
+        json:
+    {
+		"status": 200,
+		"message": "Se registró con éxito"
+	}
+    <br>
+    Incorrecto:
+    
+    Status: 403
+    body:{
+        "status": 403,
+        "message" : "No se registró"
+    }
+    <br>
+    Error: 
+    
+    Status: 500 
+    json: {
+        status: 500,
+        "message" : "Error en el sistema"
+    }
+    </td></tr>
+    </table>
+
+
+
+    <br>
+
+
+
+
+    <h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR TIPO-ACTIVIDAD</h3>
+    <table>
+        <tr><td>Número</td> <td>2</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Actualizar Tipo-Actividad</td></tr>
+        <tr><td>URL</td>  <td>/actualizarActividad/:id 2</td></tr>
+        <tr><td>Descripción</td>  <td>Permite actualizar un tipo de actividad existente en la base de datos</td></tr>
+        <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+        <tr><td>Header</td>  <td>Null</td></tr>
+        <tr><td>Request json</td>  <td>{"nombre": "Cosechar"}</td></tr>
+        <tr><td>Respuesta json</td>  <td>	
+        Correcto: 
+        Status: 200
+        json:
+        {
+            "status": 200,
+            "message": "Se actualizó con éxito"
+        }
+    <br>
+    Incorrecto:
+    
+    Status: 404
+    body:{
+        "status": 404,
+        "message" : "No se encontró el registro para actualizar"
+    }
+    <br>
+    Error: 
+    
+    Status: 500 
+    json: {
+        "status": 500,
+        "message" : "Error en el sistema"
+    }
+    </td></tr>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+    <h3>Requerimiento 3. Documentacion ENDPOINT DESACTIVAR TIPO-ACTIVIDAD</h3>
+<table>
+    <tr><td>Número</td> <td>3</td></tr>
+    <tr><td>Nombre del Servicio</td>  <td>Desactivar Tipo-Actividad</td></tr>
+    <tr><td>URL</td>  <td>/desactivarActividad</td></tr>
+    <tr><td>Descripción</td>  <td>Permite desactivar un tipo de actividad existente en la base de datos</td></tr>
+    <tr><td>Metodo HTTP</td>  <td>DELETE</td></tr>
+    <tr><td>Header</td>  <td>Null</td></tr>
+    <tr><td>Request json</td>  <td>{"id_tipo_actividad": 1}</td></tr>
+    <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    {
+		"status": 200,
+		"message": "Se desactivó con éxito",
+		"result": {
+		"affectedRows": 1 
+		}
+	}
+<br>
+Incorrecto:
+
+Status: 404
+body:{
+    "status": 404,
+    "message" : "No se encontró el registro para desactivar"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+    "status": 500,
+    "message" : "error en el sistema"
+}
+</td></tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+
+
+
+<h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR ACTIVIDAD</h3>
+<table>
+    <tr><td>Número</td> <td>4</td></tr>
+    <tr><td>Nombre del Servicio</td>  <td>Buscar Tipo de Actividad</td></tr>
+    <tr><td>URL</td>  <td>/buscarActividad/:id 2</td></tr>
+    <tr><td>Descripción</td>  <td>Permite buscar un tipo de actividad por su nombre en la base de datos</td></tr>
+    <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+    <tr><td>Header</td>  <td>Null</td></tr>
+    <tr><td>Request json</td>  <td>{Null}</td></tr>
+    <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    [
+        {
+            "id_tipo_actividad": 2,
+            "nombre":"Abonar"
+        }
+    ]
+<br>
+Incorrecto:
+
+Status: 404
+body:{
+    "status": 404,
+    "message" : "No se encontraron resultados para la búsqueda"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+    "status": 500,
+    "message" : "error en el sistema"
+}
+</td></tr>
+</table>
+
+
+
+
+
+<br>
+
+
+<h3>Requerimiento 5. Documentacion ENDPOINT LISTAR TIPO ACTIVIDAD</h3>
+<table>
+    <tr><td>Número</td> <td>5</td></tr>
+    <tr><td>Nombre del Servicio</td>  <td>Listar tipo Actividad</td></tr>
+    <tr><td>URL</td>  <td>/listarActividad</td></tr>
+    <tr><td>Descripción</td>  <td>Permite obtener una lista de todas las actividades registradas en la base de datos</td></tr>
+    <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+    <tr><td>Header</td>  <td>Null</td></tr>
+    <tr><td>Request json</td>  <td>Null</td></tr>
+    <tr><td>Respuesta json</td>  <td>   
+    Correcto: 
+    Status: 200
+    json:
+    [
+        {
+            "id_tipo_actividad": 1,
+            "nombre": "Guadañar"
+        },
+        {
+            "id_tipo_actividad": 2,
+            "nombre": "Abonar"
+        },
+    ]
+<br>
+Incorrecto:
+
+Status: 404
+body:{
+    "status": 404,
+    "message" : "No hay ninguna actividad"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+    "status": 500,
+    "message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+
+
+
+<br>
+<br>
+
+
+
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+<hr>
+<h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR RECURSOS-UTILIZADOS</h3>
+<table>
+    <tr><td>Número</td> <td>1</td></tr>
+    <tr><td>Nombre del Servicio</td>  <td>RECURSOS-UTILIZADOS</td></tr>
+    <tr><td>URL</td>  <td>/registrarRecursos</td></tr>
+    <tr><td>Descripción</td>  <td>Permite registrar un nuevo recurso utilizado en la base de datos</td></tr>
+    <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
+    <tr><td>Header</td>  <td>Null</td></tr>
+    <tr><td>Request json</td>  <td>{"cantidad": 1}</td></tr>
+    <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+{
+    "status": 200,
+    "message": "Se registró con éxito"
+}
+<br>
+Incorrecto:
+
+Status: 403
+body:{
+    "status": 403,
+    "message" : "No se registró"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+    status: 500,
+    "message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+
+
+
+<br>
+
+
+
+
+<h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR RECURSOS-UTILIZADOS</h3>
+<table>
+    <tr><td>Número</td> <td>2</td></tr>
+    <tr><td>Nombre del Servicio</td>  <td>Actualizar RECURSOS-UTILIZADOS</td></tr>
+    <tr><td>URL</td>  <td>/actualizarRecursos/:id 3</td></tr>
+    <tr><td>Descripción</td>  <td>Permite actualizar un recurso utilizado existente en la base de datos</td></tr>
+    <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+    <tr><td>Header</td>  <td>Null</td></tr>
+    <tr><td>Request json</td>  <td>{"cantidad": 2}</td></tr>
+    <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    {
+        "status": 200,
+        "message": "Se actualizó con éxito",
+    }
+<br>
+Incorrecto:
+
+Status: 404
+body:{
+    "status": 404,
+    "message" : "No se encontró el registro para actualizar"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+    "status": 500,
+    "message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+<h3>Requerimiento 3. Documentacion ENDPOINT DESACTIVAR RECURSOS-UTILIZADOS</h3>
+<table>
+<tr><td>Número</td> <td>3</td></tr>
+<tr><td>Nombre del Servicio</td>  <td>Desactivar RECURSOS-UTILIZADOS</td></tr>
+<tr><td>URL</td>  <td>/desactivarRecursos</td></tr>
+<tr><td>Descripción</td>  <td>Permite desactivar un recurso utilizado existente en la base de datos</td></tr>
+<tr><td>Metodo HTTP</td>  <td>DELETE</td></tr>
+<tr><td>Header</td>  <td>Null</td></tr>
+<tr><td>Request json</td>  <td>{"id_recursos_utilizados": 3}</td></tr>
+<tr><td>Respuesta json</td>  <td>	
+Correcto: 
+Status: 200
+json:
+{
+    "status": 200,
+    "message": "Se desactivó con éxito",
+    "result": {
+    "affectedRows": 1 
+    }
+}
+<br>
+Incorrecto:
+
+Status: 404
+body:{
+"status": 404,
+"message" : "No se encontró el registro para desactivar"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+"status": 500,
+"message" : "error en el sistema"
+}
+</td></tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+<br>
+
+
+
+
+<h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR RECURSOS-UTILIZADOS</h3>
+<table>
+<tr><td>Número</td> <td>4</td></tr>
+<tr><td>Nombre del Servicio</td>  <td>Buscar RECURSOS-UTILIZADOS</td></tr>
+<tr><td>URL</td>  <td>/buscarRecursos/:id 4</td></tr>
+<tr><td>Descripción</td>  <td>Permite buscar un recurso utilizado por su nombre en la base de datos</td></tr>
+<tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+<tr><td>Header</td>  <td>Null</td></tr>
+<tr><td>Request json</td>  <td>{Null}</td></tr>
+<tr><td>Respuesta json</td>  <td>	
+Correcto: 
+Status: 200
+json:
+[
+    {
+        "id_recursos_utilizados": 4,
+        "cantidad": 2
+    }
+]
+<br>
+Incorrecto:
+
+Status: 404
+body:{
+"status": 404,
+"message" : "No se encontraron resultados para la búsqueda"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+"status": 500,
+"message" : "error en el sistema"
+}
+</td></tr>
+</table>
+
+
+
+
+
+<br>
+
+
+<h3>Requerimiento 5. Documentacion ENDPOINT LISTAR RECURSOS-UTILIZADOS</h3>
+<table>
+<tr><td>Número</td> <td>5</td></tr>
+<tr><td>Nombre del Servicio</td>  <td>Listar RECURSOS-UTILIZADOS</td></tr>
+<tr><td>URL</td>  <td>/listarRecursos</td></tr>
+<tr><td>Descripción</td>  <td>Permite obtener una lista de todas los recursos utilizados registrados en la base de datos</td></tr>
+<tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+<tr><td>Header</td>  <td>Null</td></tr>
+<tr><td>Request json</td>  <td>Null</td></tr>
+<tr><td>Respuesta json</td>  <td>   
+Correcto: 
+Status: 200
+json:
+[
+    {
+        "id_recursos_utilizados": 4,
+        "cantidad": 2
+    },
+    {
+        "id_recursos_utilizados": 6,
+        "cantidad": 4
+    },
+]
+<br>
+Incorrecto:
+
+Status: 404
+body:{
+"status": 404,
+"message" : "No hay ninguna actividad"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+"status": 500,
+"message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+
+
+</body>
+</html>
