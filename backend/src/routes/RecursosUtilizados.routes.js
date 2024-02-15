@@ -6,8 +6,8 @@ const rutaDeRecursosUtilizados = Router();
 
 rutaDeRecursosUtilizados.post("/registrarRecursos", RegistrarRecursosUtilizados);
 rutaDeRecursosUtilizados.get("/listarRecursos", listarRecursosUtilizados);
-rutaDeRecursosUtilizados.put("/actualizarRecursos", actualizarRecursosUtilizados);
+rutaDeRecursosUtilizados.put("/actualizarRecursos/:id", actualizarRecursosUtilizados);
 rutaDeRecursosUtilizados.delete("/desactivarRecursos", desactivarRecursosUtilizados);
-rutaDeRecursosUtilizados.get("/buscarRecursos", buscarRecursosUtilizados);
+rutaDeRecursosUtilizados.get("/buscarRecursos/:id", buscarRecursosUtilizados);
 
 export default rutaDeRecursosUtilizados;
