@@ -31,28 +31,41 @@ export const RegistrarActividad = async (req, res) => {
 /* Actualizar actividad */
 export const ActualizarActividad = async (req, res) => {
     try {
-        const { id_actividad, tiempo,observaciones } = req.body;
-        const [result] = await pool.query("UPDATE actividad SET tiempo = ?, observaciones = ? WHERE id_actividad = ?", [ tiempo,observaciones, id_actividad]);
+        const { id } = req.params;
+        const { tiempo, observaciones } = req.body;
+
+        console.log(`ID actividad a actualizar: ${id}`);  // Agrega este log
+
+        const [actividades] = await pool.query("SELECT * FROM actividad WHERE id_actividad=?", [id]);
+
+        console.log("Resultado de la consulta SELECT:", actividades);  // Agrega este log
+
+        const [result] = await pool.query(
+            `UPDATE actividad SET tiempo = ${tiempo ? `'${tiempo}'` : `'${actividades[0].tiempo}'`}, observaciones = ${observaciones ? `'${observaciones}'` : `'${actividades[0].observaciones}'`} WHERE id_actividad = ?`,
+            [id]
+        );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se actualizo con éxito',
+                message: 'Se actualizó con éxito',
                 result: result
             });
         } else {
             res.status(404).json({
                 status: 404,
-                message: 'No se pudo actualizar la actividad'
+                message: 'No se encontró el registro para actualizar'
             });
         }
     } catch (error) {
+        console.error("Error en la función Actualizar:", error);  // Agrega este log
         res.status(500).json({
             status: 500,
-            message: error
+            message: error.message || 'Error interno del servidor'
         });
     }
-}
+};
+
 
 /* Desactivar actividad */
 export const DesactivarActividad = async (req, res) => {
@@ -84,9 +97,9 @@ export const DesactivarActividad = async (req, res) => {
 
 export const BuscarActividad = async (req, res) => {
     try {
-        const { id_actividad } = req.body;
-        const [result] = await pool.query("SELECT * FROM actividad WHERE nombre LIKE ?", [`%${id_actividad}%`]);
-
+        const { id } = req.params;
+        const [result] = await pool.query("SELECT * FROM actividad WHERE id_actividad=?", [id]);
+                    
         if (result.length > 0) {
             res.status(200).json(result);
         } else {
