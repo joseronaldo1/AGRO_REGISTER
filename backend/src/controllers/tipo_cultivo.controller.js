@@ -31,28 +31,40 @@ export const Registrartipo_cultivo = async (req, res) => {
 /* Actualizar tipo_cultivo */
 export const Actualizartipo_cultivo = async (req, res) => {
     try {
-        const { id_cultivo, nombre } = req.body;
-        const [result] = await pool.query("UPDATE tipo_cultivo SET nombre = ? WHERE id_cultivo = ?", [ nombre, id_cultivo]);
+        const { id } = req.params;
+        const { nombre } = req.body;
+
+        console.log(`ID tipo_cultivo a actualizar: ${id}`);  // Agrega este log
+
+        const [tipo_cultivo] = await pool.query("SELECT * FROM tipo_cultivo WHERE id_cultivo=?", [id]);
+
+        console.log("Resultado de la consulta SELECT:", tipo_cultivo);  // Agrega este log
+
+        const [result] = await pool.query(
+            `UPDATE tipo_cultivo SET nombre = ${nombre ? `'${nombre}'` : `'${tipo_cultivo[0].nombre}'`} WHERE id_cultivo = ?`,
+            [id]
+        );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se actualizo con éxito',
+                message: 'Se actualizó con éxito',
                 result: result
             });
         } else {
             res.status(404).json({
                 status: 404,
-                message: 'No se pudo actualizar'
+                message: 'No se encontró el registro para actualizar'
             });
         }
     } catch (error) {
+        console.error("Error en la función Actualizar:", error);  // Agrega este log
         res.status(500).json({
             status: 500,
-            message: error
+            message: error.message || 'Error interno del servidor'
         });
     }
-}
+};
 
 /* Desactivar tipo_cultivo */
 export const Desactivartipo_cultivo = async (req, res) => {
@@ -84,9 +96,9 @@ export const Desactivartipo_cultivo = async (req, res) => {
 
 export const Buscartipo_cultivo = async (req, res) => {
     try {
-        const { nombre } = req.body;
-        const [result] = await pool.query("SELECT * FROM tipo_cultivo WHERE nombre LIKE ?", [`%${nombre}%`]);
-
+        const { id } = req.params;
+        const [result] = await pool.query("SELECT * FROM tipo_cultivo WHERE id_cultivo=?", [id]);
+                    
         if (result.length > 0) {
             res.status(200).json(result);
         } else {
