@@ -10,7 +10,7 @@ export const listarProgramacion = async (req, res) => {
       res.status(200).json(result);
     } else {
       res.status(400).json({
-        Mensaje: "No hay programación",
+        Mensaje: "No se encontraron programaciones",
       });
     }
   } catch (error) {
@@ -44,7 +44,7 @@ export const RegistrarProgramacion = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: 500,
-      message: error,
+      message: "error",
     });
   }
 };
@@ -96,7 +96,7 @@ export const ActualizarProgramacion = async (req, res) => {
     } else {
       res.status(404).json({
         status: 404,
-        message: "No se encontró el registro para actualizar",
+        message: "No se pudo actualizar la programacion.",
       });
     }
   } catch (error) {
@@ -125,7 +125,7 @@ export const DesactivarProgramacion = async (req, res) => {
     } else {
       res.status(404).json({
         status: 404,
-        message: "No se encontró el registro para desactivar",
+        message: "No se encontró la programacion para desactivar",
       });
     }
   } catch (error) {
@@ -150,13 +150,51 @@ export const BuscarProgramacion = async (req, res) => {
     } else {
       res.status(404).json({
         status: 404,
-        message: "No se encontraron resultados de la fecha",
+        message: "No se encontraron resultados para la búsqueda.",
       });
     }
   } catch (error) {
     res.status(500).json({
       status: 500,
       message: error,
+    });
+  }
+};
+
+//cur - Actualizar
+
+export const Actualizar = async (req, res) => {
+  try {
+    const { id_programacion } = req.params;
+    const { fecha_inicio, estado } = req.body;
+
+    console.log(`Id de la programación: ${id_programacion}`);
+
+    const [oldProgramacion] = await pool.query("SELECT * FROM programacion WHERE id_programacion=?", [id_programacion]);
+    console.log("Resultado:", oldProgramacion);
+
+    const [respuesta] = await pool.query(
+      `UPDATE programacion SET fecha_inicio = ${fecha_inicio ? `'${fecha_inicio}'` : `'${oldProgramacion[0].fecha_inicio}'`}, estado = ${estado ? `'${estado}'` : `'${oldProgramacion[0].estado}'`}
+      WHERE id_programacion = ?`,
+      [id_programacion]
+    );
+
+    if (respuesta.affectedRows > 0) {
+      res.status(200).json({
+        status: 200,
+        message: "Actualización exitosa",
+        respuesta: respuesta,
+      });
+    } else {
+      res.status(404).json({
+        status: 404,
+        message: "No se encontraron resultados para la actualización",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: 500,
+      message: error.message,
     });
   }
 };
