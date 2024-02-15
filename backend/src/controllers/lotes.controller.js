@@ -22,30 +22,41 @@ export const listarTodo =async (req, res)=> {
     }
 }
 
-///registrar
 
-
-export const registrar =async (req, res)=> {
+//crud Registrar
+export const registrar = async (req, res) => {
     try {
         const { nombre, estado } =req.body
-        const [result] = await pool.query("INSERT INTO lotes (nombre, estado) VALUES (?, ?)", [nombre, estado])
 
-        if (result.affectedRows > 0 ) {
-            res.json({
-                "mensaje": "lote registrado con exito"
-            })
-        }else{
-            res.json({
-                "mensaje": "no se pudo registrar el lote "
-            })
+        // Validar que nombre_variedad esté presente en el cuerpo de la solicitud
+        if (!nombre, !estado) {
+            return res.status(400).json({
+                status: 400,
+                message: 'completa todos los campos requeridos'
+            });
         }
-        
+
+        const [result] = await pool.query("INSERT INTO lotes (nombre, estado) VALUES (?, ?)", [nombre, estado]);
+        if (result.affectedRows > 0) {
+            res.status(200).json({
+                status: 200,
+                message: 'lote registrado con exito',
+                result: result
+            });
+        } else {
+            res.status(403).json({
+                status: 403,
+                message: 'no se pudo registrar el lote',
+            });
+        }
     } catch (error) {
         res.status(500).json({
-            "mensaje": error
-        })
+            status: 500,
+            message: error.message || 'Ha ocurrido un error '
+        });
     }
 }
+
 //CRUD - eliminar
 export const eliminar = async (req, res) => {
     try {
@@ -55,13 +66,13 @@ export const eliminar = async (req, res) => {
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se desactivó con éxito',
+                message: 'Se elimino con éxito',
                 result: result
             });
         } else {
             res.status(404).json({
                 status: 404,
-                message: 'No se encontró el registro para desactivar'
+                message: 'No se encontró el registro para eliminar'
             });
         }
     } catch (error) {
