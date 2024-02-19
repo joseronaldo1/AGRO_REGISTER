@@ -8,7 +8,7 @@ const rutaDeTipoRecurso = Router()
 rutaDeTipoRecurso.get("/listarRecurso", listarTipoRecurso);
 rutaDeTipoRecurso.post("/RegistroRecurso", RegistroTipoRecurso);
 rutaDeTipoRecurso.put("/actualizarRecurso/:id", ActualizarTipoRecurso);
-rutaDeTipoRecurso.delete("/desactivarRecurso", DesactivarTipoRecurso);
+rutaDeTipoRecurso.put("/desactivar/Recurso/:id", DesactivarTipoRecurso);
 rutaDeTipoRecurso.get("/buscarRecurso/:id", BuscarTipoRecurso);
 
 
