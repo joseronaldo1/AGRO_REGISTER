@@ -1,11 +1,10 @@
 import { pool } from "../database/conexion.js";
 
-
 //crud listar
 export const listar = async (req, res) => {
         try {
             const [result] = await pool.query("SELECT * FROM produccion")
-    
+
             if (result.length > 0) {
                 res.status(200).json(result);
             } else {
@@ -92,40 +91,46 @@ export const Actualizar = async (req, res) => {
         });
     }
 };
-
-
-//CRUD - Desactivar
-export const Eliminar = async (req, res) => {
+//desactivar
+export const Desactivar = async (req, res) => {
     try {
-        const { id_produccion } = req.body; // 
-        const [result] = await pool.query("DELETE FROM produccion WHERE id_produccion = ?", [id_produccion]); 
+        const { id } = req.params;
+        const { estado } = req.body;
+
+        const [oldproduccion] = await pool.query("SELECT * FROM produccion WHERE id_produccion=?", [id]);
+
+        const [result] = await pool.query(
+            `UPDATE produccion SET estado = ${estado ? `'${estado}'` : `'${oldproduccion[0].estado}'`} WHERE id_produccion=?`,
+            [id]
+        );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se elimino con éxito',
+                message: 'Se actualizo con éxito',
                 result: result
             });
         } else {
             res.status(404).json({
                 status: 404,
-                message: 'No se encontró el registro para desactivar'
+                message: 'No se encontró el registro para actualizar'
             });
         }
     } catch (error) {
+        console.error("Error en la función Actualizar:", error);  // Agrega este log
         res.status(500).json({
             status: 500,
-            message: error
+            message: error.message || 'Error interno del servidor'
         });
     }
-}
+};
 
 // CRUD - Buscarsolouno
 export const Buscar = async (req, res) => {
     try {
         const { id } = req.params;
         const [result] = await pool.query("SELECT * FROM lotes WHERE id_lote=?", [id]);
-                    
+
         if (result.length > 0) {
             res.status(200).json(result);
         } else {

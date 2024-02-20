@@ -1,6 +1,6 @@
 // Produccion.route.js
 import { Router } from "express";
-import { Registrar, listar, Actualizar, Eliminar, Buscar } from "../controller/Produccion.controller.js";
+import { Registrar, listar, Actualizar, Buscar, Desactivar } from "../controllers/Produccion.controller.js";
 
 
 const rutaDeProduccion = Router()
@@ -9,7 +9,7 @@ const rutaDeProduccion = Router()
 rutaDeProduccion.get("/Produccion", listar)
 rutaDeProduccion.post("/Produccion", Registrar)
 rutaDeProduccion.put("/Produccion/:id", Actualizar)
-rutaDeProduccion.delete("/Produccion", Eliminar);
+rutaDeProduccion.put("/Produccion/desactivar/:id",Desactivar);
 rutaDeProduccion.get("/Produccion/:id", Buscar);
 
-export { rutaDeProduccion }; // Exporta la constante utilizando la sintaxis de exportación nombrada
+export default rutaDeProduccion 
