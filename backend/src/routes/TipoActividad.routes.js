@@ -6,7 +6,7 @@ const rutaDeTipoActividad = Router();
 rutaDeTipoActividad.post("/registrarActividad", RegistrarTipoActividad);
 rutaDeTipoActividad.get("/listarActividad", listarTipoActividad);
 rutaDeTipoActividad.put("/actualizarActividad/:id", actualizarTipoActividad);
-rutaDeTipoActividad.delete("/desactivarActividad", desactivarTipoActividad);
+rutaDeTipoActividad.put("/desactivar/Actividad/:id", desactivarTipoActividad);
 rutaDeTipoActividad.get("/buscarActividad/:id", buscarTipoActividad);
 
 export default rutaDeTipoActividad;

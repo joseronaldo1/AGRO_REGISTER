@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
     <title>Documentacion</title>
@@ -12,11 +12,12 @@
     <h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR TIPO-ACTIVIDAD</h3>
     <table>
         <tr><td>Número</td> <td>1</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Tipo Actividad</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Registrar Tipo Actividad</td></tr>
         <tr><td>URL</td>  <td>/registrarActividad</td></tr>
         <tr><td>Descripción</td>  <td>Permite registrar un nuevo tipo de actividad en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
+        <tr><td>Usuarios</td>  <td>Administrador,lider</td></tr>
         <tr><td>Request json</td>  <td>{"nombre":"Abonar"}</td></tr>
         <tr><td>Respuesta json</td>  <td>	
         Correcto: 
@@ -43,6 +44,7 @@
         "message" : "Error en el sistema"
     }
     </td></tr>
+    <tr><td>Programador</td>  <td>Esteban Gaviria M - deveag</td></tr>
     </table>
 
 
@@ -60,6 +62,7 @@
         <tr><td>Descripción</td>  <td>Permite actualizar un tipo de actividad existente en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
+        <tr><td>Usuarios</td>  <td>Administrador,lider</td></tr>
         <tr><td>Request json</td>  <td>{"nombre": "Cosechar"}</td></tr>
         <tr><td>Respuesta json</td>  <td>	
         Correcto: 
@@ -86,6 +89,7 @@
         "message" : "Error en el sistema"
     }
     </td></tr>
+    <tr><td>Programador</td>  <td>Esteban Gaviria M - deveag</td></tr>
     </table>
 
 
@@ -102,18 +106,19 @@
 <table>
     <tr><td>Número</td> <td>3</td></tr>
     <tr><td>Nombre del Servicio</td>  <td>Desactivar Tipo-Actividad</td></tr>
-    <tr><td>URL</td>  <td>/desactivarActividad</td></tr>
+    <tr><td>URL</td>  <td>/desactivar/Actividad/:id</td></tr>
     <tr><td>Descripción</td>  <td>Permite desactivar un tipo de actividad existente en la base de datos</td></tr>
-    <tr><td>Metodo HTTP</td>  <td>DELETE</td></tr>
+    <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
     <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Request json</td>  <td>{"id_tipo_actividad": 1}</td></tr>
+    <tr><td>Usuarios</td>  <td>Administrador</td></tr>
+    <tr><td>Request json</td>  <td>{"estado": "inactivo"}</td></tr>
     <tr><td>Respuesta json</td>  <td>	
     Correcto: 
     Status: 200
     json:
     {
 		"status": 200,
-		"message": "Se desactivó con éxito",
+		"message": "Se actualizó con éxito",
 		"result": {
 		"affectedRows": 1 
 		}
@@ -124,17 +129,18 @@ Incorrecto:
 Status: 404
 body:{
     "status": 404,
-    "message" : "No se encontró el registro para desactivar"
+    "message" : "No se encontró el registro para actualizar"
 }
 <br>
 Error: 
 
-Status: 500 
+Status: 500     
 json: {
     "status": 500,
-    "message" : "error en el sistema"
+    "message" : "Error interno del servidor"
 }
 </td></tr>
+<tr><td>Programador</td>  <td>Esteban Gaviria M - deveag</td></tr>
 </table>
 
 
@@ -157,9 +163,10 @@ json: {
     <tr><td>Número</td> <td>4</td></tr>
     <tr><td>Nombre del Servicio</td>  <td>Buscar Tipo de Actividad</td></tr>
     <tr><td>URL</td>  <td>/buscarActividad/:id 2</td></tr>
-    <tr><td>Descripción</td>  <td>Permite buscar un tipo de actividad por su nombre en la base de datos</td></tr>
+    <tr><td>Descripción</td>  <td>Permite buscar un tipo de actividad por su id en la base de datos</td></tr>
     <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
     <tr><td>Header</td>  <td>Null</td></tr>
+    <tr><td>Usuarios</td>  <td>Administrador,Lider,Aprendiz</td></tr>
     <tr><td>Request json</td>  <td>{Null}</td></tr>
     <tr><td>Respuesta json</td>  <td>	
     Correcto: 
@@ -168,7 +175,9 @@ json: {
     [
         {
             "id_tipo_actividad": 2,
-            "nombre":"Abonar"
+            "nombre":"Abonar",
+            "estado":"Activo",
+            "fk_id_tipo_cultivo": #
         }
     ]
 <br>
@@ -188,6 +197,7 @@ json: {
     "message" : "error en el sistema"
 }
 </td></tr>
+<tr><td>Programador</td>  <td>Esteban Gaviria M - deveag</td></tr>
 </table>
 
 
@@ -205,6 +215,7 @@ json: {
     <tr><td>Descripción</td>  <td>Permite obtener una lista de todas las actividades registradas en la base de datos</td></tr>
     <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
     <tr><td>Header</td>  <td>Null</td></tr>
+    <tr><td>Usuarios</td>  <td>Administrador,Lider,Aprendiz</td></tr>
     <tr><td>Request json</td>  <td>Null</td></tr>
     <tr><td>Respuesta json</td>  <td>   
     Correcto: 
@@ -213,11 +224,15 @@ json: {
     [
         {
             "id_tipo_actividad": 1,
-            "nombre": "Guadañar"
+            "nombre": "Guadañar",
+            "estado":"Activo",
+            "fk_id_tipo_cultivo": #
         },
         {
             "id_tipo_actividad": 2,
-            "nombre": "Abonar"
+            "nombre": "Abonar",
+            "estado":"Activo",
+            "fk_id_tipo_cultivo": #
         },
     ]
 <br>
@@ -237,6 +252,7 @@ json: {
     "message" : "Error en el sistema"
 }
 </td></tr>
+<tr><td>Programador</td>  <td>Esteban Gaviria M - deveag</td></tr>
 </table>
 
 
@@ -258,15 +274,17 @@ json: {
 
 
 
+
 <hr>
 <h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR RECURSOS-UTILIZADOS</h3>
 <table>
     <tr><td>Número</td> <td>1</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>RECURSOS-UTILIZADOS</td></tr>
+    <tr><td>Nombre del Servicio</td>  <td>REGISTRAR RECURSOS-UTILIZADOS</td></tr>
     <tr><td>URL</td>  <td>/registrarRecursos</td></tr>
     <tr><td>Descripción</td>  <td>Permite registrar un nuevo recurso utilizado en la base de datos</td></tr>
     <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
     <tr><td>Header</td>  <td>Null</td></tr>
+    <tr><td>Usuarios</td>  <td>Administrador,lider</td></tr>
     <tr><td>Request json</td>  <td>{"cantidad": 1}</td></tr>
     <tr><td>Respuesta json</td>  <td>	
     Correcto: 
@@ -293,6 +311,7 @@ json: {
     "message" : "Error en el sistema"
 }
 </td></tr>
+<tr><td>Programador</td>  <td>Esteban Gaviria M - deveag</td></tr>
 </table>
 
 
@@ -310,6 +329,7 @@ json: {
     <tr><td>Descripción</td>  <td>Permite actualizar un recurso utilizado existente en la base de datos</td></tr>
     <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
     <tr><td>Header</td>  <td>Null</td></tr>
+    <tr><td>Usuarios</td>  <td>Administrador,lider</td></tr>
     <tr><td>Request json</td>  <td>{"cantidad": 2}</td></tr>
     <tr><td>Respuesta json</td>  <td>	
     Correcto: 
@@ -336,6 +356,7 @@ json: {
     "message" : "Error en el sistema"
 }
 </td></tr>
+<tr><td>Programador</td>  <td>Esteban Gaviria M - deveag</td></tr>
 </table>
 
 
@@ -352,18 +373,19 @@ json: {
 <table>
 <tr><td>Número</td> <td>3</td></tr>
 <tr><td>Nombre del Servicio</td>  <td>Desactivar RECURSOS-UTILIZADOS</td></tr>
-<tr><td>URL</td>  <td>/desactivarRecursos</td></tr>
+<tr><td>URL</td>  <td>/desactivar/Recursos/:id</td></tr>
 <tr><td>Descripción</td>  <td>Permite desactivar un recurso utilizado existente en la base de datos</td></tr>
-<tr><td>Metodo HTTP</td>  <td>DELETE</td></tr>
+<tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
 <tr><td>Header</td>  <td>Null</td></tr>
-<tr><td>Request json</td>  <td>{"id_recursos_utilizados": 3}</td></tr>
+<tr><td>Usuarios</td>  <td>Administrador</td></tr>
+<tr><td>Request json</td>  <td>{"estado": "inactivo"}</td></tr>
 <tr><td>Respuesta json</td>  <td>	
 Correcto: 
 Status: 200
 json:
 {
     "status": 200,
-    "message": "Se desactivó con éxito",
+    "message": "Se actualizó con éxito",
     "result": {
     "affectedRows": 1 
     }
@@ -374,7 +396,7 @@ Incorrecto:
 Status: 404
 body:{
 "status": 404,
-"message" : "No se encontró el registro para desactivar"
+"message" : "No se encontró el registro para actualizar"
 }
 <br>
 Error: 
@@ -382,9 +404,10 @@ Error:
 Status: 500 
 json: {
 "status": 500,
-"message" : "error en el sistema"
+"message" : "Error interno del servidor"
 }
 </td></tr>
+<tr><td>Programador</td>  <td>Esteban Gaviria M - deveag</td></tr>
 </table>
 
 
@@ -407,9 +430,10 @@ json: {
 <tr><td>Número</td> <td>4</td></tr>
 <tr><td>Nombre del Servicio</td>  <td>Buscar RECURSOS-UTILIZADOS</td></tr>
 <tr><td>URL</td>  <td>/buscarRecursos/:id 4</td></tr>
-<tr><td>Descripción</td>  <td>Permite buscar un recurso utilizado por su nombre en la base de datos</td></tr>
+<tr><td>Descripción</td>  <td>Permite buscar un recurso utilizado por su id en la base de datos</td></tr>
 <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
 <tr><td>Header</td>  <td>Null</td></tr>
+<tr><td>Usuarios</td>  <td>Administrador,Lider,Aprendiz</td></tr>
 <tr><td>Request json</td>  <td>{Null}</td></tr>
 <tr><td>Respuesta json</td>  <td>	
 Correcto: 
@@ -418,7 +442,10 @@ json:
 [
     {
         "id_recursos_utilizados": 4,
-        "cantidad": 2
+        "cantidad": 2,
+        "estado": "activo",
+        "fk_id_actividad": #,
+        "fk_id_tipo_recurso": #
     }
 ]
 <br>
@@ -438,6 +465,7 @@ json: {
 "message" : "error en el sistema"
 }
 </td></tr>
+<tr><td>Programador</td>  <td>Esteban Gaviria M - deveag</td></tr>
 </table>
 
 
@@ -455,6 +483,7 @@ json: {
 <tr><td>Descripción</td>  <td>Permite obtener una lista de todas los recursos utilizados registrados en la base de datos</td></tr>
 <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
 <tr><td>Header</td>  <td>Null</td></tr>
+<tr><td>Usuarios</td>  <td>Administrador,Lider,Aprendiz</td></tr>
 <tr><td>Request json</td>  <td>Null</td></tr>
 <tr><td>Respuesta json</td>  <td>   
 Correcto: 
@@ -463,11 +492,17 @@ json:
 [
     {
         "id_recursos_utilizados": 4,
-        "cantidad": 2
+        "cantidad": 2,
+        "estado": "activo",
+        "fk_id_actividad": #,
+        "fk_id_tipo_recurso": #
     },
     {
         "id_recursos_utilizados": 6,
-        "cantidad": 4
+        "cantidad": 4,
+        "estado": "activo",
+        "fk_id_actividad": #,
+        "fk_id_tipo_recurso": #
     },
 ]
 <br>
@@ -487,6 +522,7 @@ json: {
 "message" : "Error en el sistema"
 }
 </td></tr>
+<tr><td>Programador</td>  <td>Esteban Gaviria M - deveag</td></tr>
 </table>
 
 
