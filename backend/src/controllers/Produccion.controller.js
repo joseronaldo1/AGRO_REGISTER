@@ -29,13 +29,13 @@ export const RegistrarProduccion = async (req, res) => {
         if (result.affectedRows > 0 ) {
             res.status(200).json({
                 status:(200),
-                message:'se registro la informacion con exito ',
+                message:'Se registró la información con éxito',
                 result:result
             })
         } else {
             res.status(403).json({
                 status:(403),
-                message:'no se registro la informacion',
+                message:'No se registró la información',
             })
         }
     } catch (error) {
@@ -58,7 +58,7 @@ export const ActualizarProduccion = async (req, res) => {
         console.log("Resultado de la consulta SELECT:", produccion);  // Agrega este log
 
         const [result] = await pool.query(
-            `UPDATE lotes SET precio = ${precio ? `'${precio}'` : `'${produccion[0].precio}'`}, cantidad_produccion = ${cantidad_produccion ? `'${cantidad_produccion}'` : `'${produccion[0].cantidad_produccion}'`} WHERE id_produccion = ?`,
+            `UPDATE produccion SET precio = ${precio ? `'${precio}'` : `'${produccion[0].precio}'`}, cantidad_produccion = ${cantidad_produccion ? `'${cantidad_produccion}'` : `'${produccion[0].cantidad_produccion}'`} WHERE id_produccion = ?`,
             [id]
         );
 
@@ -86,28 +86,37 @@ export const ActualizarProduccion = async (req, res) => {
 //CRUD - Desactivar
 export const DesactivarProduccion = async (req, res) => {
     try {
-        const { id_produccion } = req.body; //
-        const [result] = await pool.query("DELETE FROM produccion WHERE id_produccion = ?", [id_produccion]);
+        const { id } = req.params;
+        const { estado } = req.body;
+
+        const [produccion] = await pool.query("SELECT * FROM produccion WHERE id_produccion=?", [id]);
+
+        const [result] = await pool.query(
+            `UPDATE produccion SET estado = ${estado ? `'${estado}'` : `'${produccion[0].estado}'`} WHERE id_produccion=?`,
+            [id]
+        );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se desactivó con éxito',
+                message: 'Se actualizó con éxito',
                 result: result
             });
         } else {
             res.status(404).json({
                 status: 404,
-                message: 'No se encontró el registro para desactivar'
+                message: 'No se encontró el registro para actualizar'
             });
         }
     } catch (error) {
+        console.error("Error en la función Actualizar:", error); // Agrega este log
         res.status(500).json({
             status: 500,
-            message: error
+            message: error.message || 'Error interno del servidor'
         });
     }
-}
+};
+
 
 // CRUD - Buscar
 export const BuscarProduccion = async (req, res) => {

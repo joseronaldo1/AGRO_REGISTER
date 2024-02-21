@@ -4,11 +4,11 @@ import { RegistrarProduccion, listarProduccion, ActualizarProduccion, Desactivar
 
 const rutaDeProduccion = Router()
 
-//localhost:4000/VariedadCultivo
+//localhost:4000/
 rutaDeProduccion.get("/listarProduccion", listarProduccion)
 rutaDeProduccion.post("/RegistrarProduccion", RegistrarProduccion)
-rutaDeProduccion.put("/actualizarProduccion", ActualizarProduccion)
-rutaDeProduccion.delete("/desactivarProduccion", DesactivarProduccion);
-rutaDeProduccion.get("/buscarProduccion", BuscarProduccion);
+rutaDeProduccion.put("/actualizarProduccion/:id", ActualizarProduccion)
+rutaDeProduccion.put("/DesactivarProduccion/Produccion/:id", DesactivarProduccion);
+rutaDeProduccion.get("/buscarProduccion/:id", BuscarProduccion);
 
 export default rutaDeProduccion;

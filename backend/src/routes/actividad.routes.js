@@ -1,13 +1,13 @@
 import { Router } from "express";
 import {  RegistrarActividad, ActualizarActividad, DesactivarActividad, BuscarActividad, listarActividad  } from "../controllers/actividad.controller.js";
 
-const router = Router();
+const rutaActividad = Router();
 
 
-router.post("/RegistrarActividad", RegistrarActividad);
-router.put("/ActualizarActividad", ActualizarActividad);
-router.delete("/DesactivarActividad", DesactivarActividad);
-router.get("/BuscarActividad", BuscarActividad);
-router.get("/listarActividad", listarActividad);
+rutaActividad .post("/RegistrarActividad", RegistrarActividad);
+rutaActividad .put("/ActualizarActividad/:id", ActualizarActividad);
+rutaActividad .put("/DesactivarActividad/Actividad/:id", DesactivarActividad);
+rutaActividad .get("/BuscarActividad/:id", BuscarActividad);
+rutaActividad .get("/listarActividad", listarActividad);
 
-export default router;
+export default rutaActividad ;
