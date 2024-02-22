@@ -62,42 +62,39 @@ export const listarTipoActividad = async (req, res) => {
 }
 
 
-// CRUD - Actualizar
-    export const actualizarTipoActividad = async (req, res) => {
-        try {
-            const { id } = req.params;
-            const { nombre } = req.body;
-    
-            console.log("Consulta SQL:", `SELECT * FROM tipo_actividad WHERE id_tipo_actividad=${id}`);
-    
-            const [oldTipoActividad] = await pool.query("SELECT * FROM tipo_actividad WHERE id_tipo_actividad=?", [id]);
-    
-            
-    
-            const [result] = await pool.query(
-                `UPDATE tipo_actividad SET nombre = ${nombre ? `'${nombre}'` : `'${oldTipoActividad[0].nombre}'`} WHERE id_tipo_actividad = ?`,[id]);
-    
-            if (result.affectedRows > 0) {
-                res.status(200).json({
-                    status: 200,
-                    message: 'Se actualizó con éxito',
-                    result: result
-                });
-            } else {
-                res.status(404).json({
-                    status: 404,
-                    message: 'No se encontró el registro para actualizar'
-                });
-            }
-        } catch (error) {
-            console.error("Error en la función Actualizar:", error);  
-            res.status(500).json({
-                status: 500,
-                message: error.message || "error en el sistema"
+ // CRUD - Actualizar
+export const actualizarTipoActividad = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { nombre } = req.body;
+
+        console.log("Consulta SQL:", `SELECT * FROM tipo_actividad WHERE id_tipo_actividad=${id}`);
+
+        const [oldTipoActividad] = await pool.query("SELECT * FROM tipo_actividad WHERE id_tipo_actividad=?", [id]);
+
+        const [result] = await pool.query(
+            `UPDATE tipo_actividad SET nombre = ${nombre ? `'${nombre}'` : `'${oldTipoActividad[0].nombre}'`} WHERE id_tipo_actividad = ?`,[id]);
+
+        if (result.affectedRows > 0) {
+            res.status(200).json({
+                status: 200,
+                message: 'Se actualizó con éxito',
+                result: result
+            });
+        } else {
+            res.status(404).json({
+                status: 404,
+                message: 'No se encontró el registro para actualizar'
             });
         }
-    };
-    
+    } catch (error) {
+        console.error("Error en la función Actualizar:", error);  
+        res.status(500).json({
+            status: 500,
+            message: error.message || "error en el sistema"
+        });
+    }
+};
     
 
 
@@ -113,28 +110,44 @@ export const listarTipoActividad = async (req, res) => {
 // CRUD - Desactivar
 export const desactivarTipoActividad = async (req, res) => {
     try {
-        const { id_tipo_actividad } = req.body; 
-        const [result] = await pool.query("DELETE FROM tipo_actividad WHERE id_tipo_actividad = ?", [id_tipo_actividad]); // Cambiado 'id' por 'id_tipo_actividad'
+        const { id } = req.params;
+        const { estado } = req.body;
+
+        const [oldTipoActividad] = await pool.query("SELECT * FROM tipo_actividad WHERE id_tipo_actividad=?", [id]);
+
+        const [result] = await pool.query(
+            `UPDATE tipo_actividad SET estado = ${estado ? `'${estado}'` : `'${oldTipoActividad[0].estado}'`} WHERE id_tipo_actividad=?`,
+            [id]
+        );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se desactivó con éxito',
+                message: 'Se actualizó con éxito',
                 result: result
             });
         } else {
             res.status(404).json({
                 status: 404,
-                message: 'No se encontró el registro para desactivar'
+                message: 'No se encontró el registro para actualizar'
             });
         }
     } catch (error) {
+        console.error("Error en la función Actualizar:", error);  // Agrega este log
         res.status(500).json({
             status: 500,
-            message: "error en el sistema"
+            message: error.message || 'Error interno del servidor'
         });
     }
-}
+};
+
+
+
+
+
+
+
+
 
 
 // CRUD -buscar

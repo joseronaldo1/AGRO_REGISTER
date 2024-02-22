@@ -126,29 +126,56 @@ export const actualizarRecursosUtilizados = async (req, res) => {
 
 // CRUD - Desactivar
 export const desactivarRecursosUtilizados = async (req, res) => {
-    try {
-        const { id_recursos_utilizados } = req.body; 
-        const [result] = await pool.query("DELETE FROM recursos_utilizados WHERE id_recursos_utilizados = ?", [id_recursos_utilizados]); 
+try {
+    const { id } = req.params;
+    const { estado } = req.body;
 
-        if (result.affectedRows > 0) {
-            res.status(200).json({
-                status: 200,
-                message: 'Se desactivó con éxito',
-                result: result
-            });
-        } else {
-            res.status(404).json({
-                status: 404,
-                message: 'No se encontró el registro para desactivar'
-            });
-        }
-    } catch (error) {
-        res.status(500).json({
-            status: 500,
-            message: "error en el sistema"
+    const [oldTipoRecurso] = await pool.query("SELECT * FROM recursos_utilizados WHERE id_recursos_utilizados=?", [id]);
+
+    const [result] = await pool.query(
+        `UPDATE recursos_utilizados SET estado = ${estado ? `'${estado}'` : `'${oldTipoRecurso[0].estado}'`} WHERE id_recursos_utilizados=?`,
+        [id]
+    );
+
+    if (result.affectedRows > 0) {
+        res.status(200).json({
+            status: 200,
+            message: 'Se actualizó con éxito',
+            result: result
+        });
+    } else {
+        res.status(404).json({
+            status: 404,
+            message: 'No se encontró el registro para actualizar'
         });
     }
+} catch (error) {
+    console.error("Error en la función Actualizar:", error);  // Agrega este log
+    res.status(500).json({
+        status: 500,
+        message: error.message || 'Error interno del servidor'
+    });
 }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -174,4 +201,3 @@ export const buscarRecursosUtilizados = async (req, res) => {
     }
 }
 
-    
