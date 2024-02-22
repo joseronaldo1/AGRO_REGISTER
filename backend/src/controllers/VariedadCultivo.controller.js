@@ -90,13 +90,19 @@ export const ActualizarVariedadCultivo = async (req, res) => {
 //CRUD - Desactivar
 export const DesactivarVariedadCultivo = async (req, res) => {
     try {
-        const { id_variedad_cultivo } = req.body; // 
-        const [result] = await pool.query("DELETE FROM variedad_cultivo WHERE id_variedad_cultivo = ?", [id_variedad_cultivo]); // Cambiado 'id' por 'id_tipo_actividad'
+        const { id } = req.params;
+        const { estado } = req.body;
+
+        const [oldVCultivo] = await pool.query("SELECT * FROM variedad_cultivo WHERE id_variedad_cultivo = ?", [id]); 
+        
+        const [result] = await pool.query(
+            `UPDATE variedad_cultivo SET estado = ${estado ? `'${estado}'` : `'${oldVCultivo[0].estado}'`} WHERE id_variedad_cultivo = ?`,[id]
+        );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se desactivó con éxito',
+                message: 'Se desactivo con éxito',
                 result: result
             });
         } else {
@@ -108,7 +114,7 @@ export const DesactivarVariedadCultivo = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: "error en el sistema."
+            message: error
         });
     }
 }

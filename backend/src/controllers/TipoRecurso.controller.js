@@ -92,13 +92,19 @@ export const ActualizarTipoRecurso = async (req, res) => {
 //CRUD - Desactivar
 export const DesactivarTipoRecurso = async (req, res) => {
     try {
-        const { id_tipo_recurso } = req.body; // 
-        const [result] = await pool.query("DELETE FROM tipo_recurso WHERE id_tipo_recurso = ?", [id_tipo_recurso]); // Cambiado 'id' por 'id_tipo_actividad'
+        const { id } = req.params;
+        const { estado } = req.body;
+
+        const [oldRecurso] = await pool.query("SELECT * FROM tipo_recurso WHERE id_tipo_recurso = ?", [id]); 
+        
+        const [result] = await pool.query(
+            `UPDATE tipo_recurso SET estado = ${estado ? `'${estado}'` : `'${oldRecurso[0].estado}'`} WHERE id_tipo_recurso = ?`,[id]
+        );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se desactivó con éxito',
+                message: 'Se desactivo con éxito',
                 result: result
             });
         } else {
@@ -110,7 +116,7 @@ export const DesactivarTipoRecurso = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: "error en el sistema"
+            message: error
         });
     }
 }
