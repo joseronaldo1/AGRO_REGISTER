@@ -9,6 +9,8 @@ servidor.use(body_parsere.urlencoded({extended: false}))
 servidor.set('view engine', 'ejs');
 servidor.set('views','./views');
 
+servidor.use(express.static('./public'));
+
 servidor.get('/document',(req,res)=>{
     res.render('document.ejs');
 })
