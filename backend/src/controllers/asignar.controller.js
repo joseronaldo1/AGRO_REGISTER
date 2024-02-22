@@ -80,34 +80,6 @@ export const editarAsignacion = async (req, res) => {
   }
 };
 
-// CRUD - Eliminar
-export const eliminarAsignacion = async (req, res) => {
-  try {
-    const { id_asignacion } = req.body;
-    const [result] = await pool.query(
-      "DELETE FROM asignaciones WHERE id_asignacion = ?",
-      [id_asignacion]
-    );
-
-    if (result.affectedRows > 0) {
-      res.status(200).json({
-        status: 200,
-        message: "Se eliminó con éxito",
-        result: result,
-      });
-    } else {
-      res.status(404).json({
-        status: 404,
-        message: "No se encontró el registro para eliminar",
-      });
-    }
-  } catch (error) {
-    res.status(500).json({
-      status: 500,
-      message: error,
-    });
-  }
-};
 
 // CRUD - Buscar
 export const buscarAsignacion = async (req, res) => {
@@ -133,8 +105,6 @@ export const buscarAsignacion = async (req, res) => {
     });
   }
 };
-
-//cur - Actualizar
 export const Actualizar = async (req, res) => {
   try {
     const { id_asignacion } = req.params;
@@ -164,9 +134,44 @@ export const Actualizar = async (req, res) => {
       });
     }
   } catch (error) {
+    console.error("Error en la función Actualizar:", error);  // Agrega este log
     res.status(500).json({
       status: 500,
-      message: error.message
+      message: error.message || 'Error interno del servidor'
+    });
+  }
+};
+
+// Agregamos la nueva función Desactivar
+export const Desactivar = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { estado } = req.body;
+
+    const [oldusuarios] = await pool.query("SELECT * FROM usuarios WHERE id_usuario=?", [id]);
+
+    const [result] = await pool.query(
+      `UPDATE usuarios SET estado = ${estado ? `'${estado}'` : `'${oldusuarios[0].estado}'`} WHERE id_usuario=?`,
+      [id]
+    );
+
+    if (result.affectedRows > 0) {
+      res.status(200).json({
+        status: 200,
+        message: 'Se actualizó con éxito',
+        result: result
+      });
+    } else {
+      res.status(404).json({
+        status: 404,
+        message: 'No se encontró el registro para actualizar'
+      });
+    }
+  } catch (error) {
+    console.error("Error en la función Desactivar:", error);  // Agrega este log
+    res.status(500).json({
+      status: 500,
+      message: error.message || 'Error interno del servidor'
     });
   }
 };

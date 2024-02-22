@@ -1,4 +1,4 @@
-// controlador
+// Controlador
 import { pool } from "../database/conexion.js";
 
 // CRUD - listar
@@ -110,9 +110,10 @@ export const ActualizarProgramacion = async (req, res) => {
 // CRUD - Desactivar
 export const DesactivarProgramacion = async (req, res) => {
   try {
-    const { id_programacion } = req.body;
+    const { id_programacion } = req.params;
+
     const [result] = await pool.query(
-      "DELETE FROM programacion WHERE id_programacion = ?",
+      "UPDATE programacion SET estado = 'Inactivo' WHERE id_programacion = ?",
       [id_programacion]
     );
 
@@ -131,7 +132,7 @@ export const DesactivarProgramacion = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       status: 500,
-      message: error,
+      message: error.message || 'Error interno del servidor',
     });
   }
 };
@@ -162,7 +163,6 @@ export const BuscarProgramacion = async (req, res) => {
 };
 
 //cur - Actualizar
-
 export const Actualizar = async (req, res) => {
   try {
     const { id_programacion } = req.params;
