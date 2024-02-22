@@ -16,6 +16,7 @@
         <tr><td>URL</td>  <td>/usuarios</td></tr>
         <tr><td>Descripción</td>  <td>Permite registrar un nuevo usuario en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>{
             "nombre": "ana",
@@ -60,6 +61,7 @@
         "message" : "Ha ocurrido un error"
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     <br>
     <h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR USUARIO</h3>
@@ -69,6 +71,7 @@
         <tr><td>URL</td>  <td>/usuarios/:id</td></tr>
         <tr><td>Descripción</td>  <td>Permite actualizar un usuario existente en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>{
             "nombre": "lopes",
@@ -104,15 +107,17 @@
         "message" : "Error interno del servidor"
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     
-    <h3>Requerimiento 3. Documentacion ENDPOINT ELIMINAR USUARIO</h3>
+    <h3>Requerimiento 3. Documentacion ENDPOINT DESACTIVAR USUARIO</h3>
     <table>
         <tr><td>Número</td> <td>3</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Eliminar usuario</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>desactivar usuario</td></tr>
         <tr><td>URL</td>  <td>/usuario</td></tr>
-        <tr><td>Descripción</td>  <td>Permite eliminar un usuario existente en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>DELETE</td></tr>
+        <tr><td>Descripción</td>  <td>Permite desactivar un usuario existente en la base de datos</td></tr>
+        <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>{
             "id_usuario": 1
@@ -123,7 +128,7 @@
         json:
         {
             "status": 200,
-            "message": "Se elimino con éxito",
+            "message": "Se actualizó con éxito",
             "result": {
             "affectedRows": 1 
             }
@@ -134,7 +139,7 @@
     Status: 404
     body:{
         "status": 404,
-        "message" : "No se encontró el registro para eliminar"
+        "message" : "No se encontró el registro para actualizar"
     }
     <br>
     Error: 
@@ -145,6 +150,7 @@
         "message" : Error
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     <h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR UN USUARIO</h3>
     <table>
@@ -153,6 +159,7 @@
         <tr><td>URL</td>  <td>/usuarios/:id</td></tr>
         <tr><td>Descripción</td>  <td>Permite buscar un usuario por su id en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+        <tr><td>Usuarios</td><td>Administrador, lider</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>{ Null }</td></tr>
         <tr><td>Respuesta json</td>  <td>   
@@ -188,6 +195,7 @@
         "message" : Error
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     <h3>Requerimiento 5. Documentacion ENDPOINT LISTAR USUARIOS</h3>
     <table>
@@ -196,6 +204,7 @@
         <tr><td>URL</td>  <td>/usuarios</td></tr>
         <tr><td>Descripción</td>  <td>Permite obtener una lista de todos los usuarios registradas en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+        <tr><td>Usuarios</td><td>Administrador, lider</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>Null</td></tr>
         <tr><td>Respuesta json</td>  <td>   
@@ -231,6 +240,7 @@
         "message" : Error
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     <br>
     <br>
@@ -245,6 +255,7 @@
         <tr><td>URL</td>  <td>/lotes</td></tr>
         <tr><td>Descripción</td>  <td>Permite registrar un nuevo lote en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>{
             "nombre": "loteE",
@@ -285,6 +296,7 @@
         "message" : "Ha ocurrido un error"
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     <br>
     <h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR LOTE</h3>
@@ -294,6 +306,7 @@
         <tr><td>URL</td>  <td>/lotes/:id</td></tr>
         <tr><td>Descripción</td>  <td>Permite actualizar un lote existente en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>{
             "nombre": "loteB",
@@ -324,15 +337,17 @@
         "message" : "Error interno del servidor"
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     
-    <h3>Requerimiento 3. Documentacion ENDPOINT ELIMINAR LOTE</h3>
+    <h3>Requerimiento 3. Documentacion ENDPOINT DESACTIVAR LOTE</h3>
     <table>
         <tr><td>Número</td> <td>3</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Eliminar lote</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Desactivar lote</td></tr>
         <tr><td>URL</td>  <td>/lotes</td></tr>
-        <tr><td>Descripción</td>  <td>Permite eliminar un lote existente en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>DELETE</td></tr>
+        <tr><td>Descripción</td>  <td>Permite desactivar un lote existente en la base de datos</td></tr>
+        <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+        <tr><td>Usuarios</td><td>Administrador</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>{
             "id_lote":4
@@ -343,7 +358,7 @@
         json:
         {
             "status": 200,
-            "message": "Se elimino con éxito",
+            "message": "Se actualizó con éxito",
             "result": {
             "affectedRows": 1 
             }
@@ -354,7 +369,7 @@
     Status: 404
     body:{
         "status": 404,
-        "message" : "No se encontró el registro para eliminar"
+        "message" : "No se encontró el registro para actualizar"
     }
     <br>
     Error: 
@@ -365,6 +380,7 @@
         "message" : Error
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     <h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR UN LOTE</h3>
     <table>
@@ -373,6 +389,7 @@
         <tr><td>URL</td>  <td>/buscarCultivo/:id</td></tr>
         <tr><td>Descripción</td>  <td>Permite buscar un lote por su id en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+        <tr><td>Usuarios</td><td>Administrador, lider, aprendiz</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>{ null}</td></tr>
         <tr><td>Respuesta json</td>  <td>   
@@ -405,6 +422,7 @@
         "message" : Error
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     <h3>Requerimiento 5. Documentacion ENDPOINT LISTAR LOTES</h3>
     <table>
@@ -413,6 +431,7 @@
         <tr><td>URL</td>  <td>/lotes</td></tr>
         <tr><td>Descripción</td>  <td>Permite obtener una lista de todos los lotes registrados en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+        <tr><td>Usuarios</td><td>Administrador, lider, aprendiz</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>Null</td></tr>
         <tr><td>Respuesta json</td>  <td>   
@@ -445,6 +464,7 @@
         "message" : Error
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
         
 
@@ -457,6 +477,7 @@
         <tr><td>URL</td>  <td>/produccion</td></tr>
         <tr><td>Descripción</td>  <td>Permite registrar una nueva produccion en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
+        <tr><td>Usuarios</td><td>Administrador, lider, aprendiz</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>{
             "fk_id_variedad_cultivo": null,
@@ -497,6 +518,7 @@
         "message" : "Ha ocurrido un error"
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     <br>
     <h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR PRODUCCION</h3>
@@ -506,6 +528,7 @@
         <tr><td>URL</td>  <td>/produccion/:id</td></tr>
         <tr><td>Descripción</td>  <td>Permite actualizar una produccion existente en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+        <tr><td>Usuarios</td><td>Administrador, lider</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>{
             "cantidad_produccion": 9,
@@ -536,15 +559,17 @@
         "message" : "Error interno del servidor"
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     
-    <h3>Requerimiento 3. Documentacion ENDPOINT ELIMINAR PRODUCCION</h3>
+    <h3>Requerimiento 3. Documentacion ENDPOINT DESACTIVAR PRODUCCION</h3>
     <table>
         <tr><td>Número</td> <td>3</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Eliminar produccion/td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Desactivar produccion/td></tr>
         <tr><td>URL</td>  <td>/produccion</td></tr>
-        <tr><td>Descripción</td>  <td>Permite eliminar una produccion existente en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>DELETE</td></tr>
+        <tr><td>Descripción</td>  <td>Permite desactivar una produccion existente en la base de datos</td></tr>
+        <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+        <tr><td>Usuarios</td><td>Administrador, lider</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>{
             "id_produccion": 3
@@ -555,7 +580,7 @@
         json:
         {
             "status": 200,
-            "message": "Se elimino con éxito",
+            "message": "Se actualizó con éxito",
             "result": {
             "affectedRows": 1 
             }
@@ -566,7 +591,7 @@
     Status: 404
     body:{
         "status": 404,
-        "message" : "No se encontró el registro para eliminar"
+        "message" : "No se encontró el registro para actualizar"
     }
     <br>
     Error: 
@@ -577,6 +602,7 @@
         "message" : Error
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>vv
     </table>
     <h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR UNA PRODUCCION</h3>
     <table>
@@ -585,6 +611,7 @@
         <tr><td>URL</td>  <td>/produccion/:id</td></tr>
         <tr><td>Descripción</td>  <td>Permite buscar una produccion por su id en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+        <tr><td>Usuarios</td><td>Administrador, lider, aprendiz</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>{ Null }</td></tr>
         <tr><td>Respuesta json</td>  <td>   
@@ -617,6 +644,7 @@
         "message" : Error
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     <h3>Requerimiento 5. Documentacion ENDPOINT LISTAR PRODUCCION</h3>
     <table>
@@ -625,6 +653,7 @@
         <tr><td>URL</td>  <td>/produccion</td></tr>
         <tr><td>Descripción</td>  <td>Permite obtener una lista de todas las producciones registradas en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+        <tr><td>Usuarios</td><td>Administrador, lider, aprendiz</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Request json</td>  <td>Null</td></tr>
         <tr><td>Respuesta json</td>  <td>   
@@ -657,6 +686,7 @@
         "message" : error
     }
     </td></tr>
+    <tr><td>Desarrollador</td><td>Jose Ronaldo Ledezma - devjrl</td></tr>
     </table>
     <br>
     <br>

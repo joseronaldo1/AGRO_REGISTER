@@ -92,23 +92,23 @@ export const Actualizar = async (req, res) => {
         });
     }
 };
-//CRUD - Desactivar
-export const Eliminar = async (req, res) => {
+//desactivar
+export const Desactivar = async (req, res) => {
     try {
         const { id } = req.params;
         const { estado } = req.body;
 
-        const [produccion] = await pool.query("SELECT * FROM produccion WHERE id_produccion=?", [id]);
+        const [oldproduccion] = await pool.query("SELECT * FROM produccion WHERE id_produccion=?", [id]);
 
         const [result] = await pool.query(
-            `UPDATE produccion SET estado = ${estado ? `'${estado}'` : `'${produccion[0].estado}'`} WHERE id_produccion=?`,
+            `UPDATE produccion SET estado = ${estado ? `'${estado}'` : `'${oldproduccion[0].estado}'`} WHERE id_produccion=?`,
             [id]
         );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se actualizó con éxito',
+                message: 'Se actualizo con éxito',
                 result: result
             });
         } else {
@@ -118,14 +118,14 @@ export const Eliminar = async (req, res) => {
             });
         }
     } catch (error) {
-        console.error("Error en la función Actualizar:", error); // Agrega este log
+        console.error("Error en la función Actualizar:", error);  // Agrega este log
+
         res.status(500).json({
             status: 500,
             message: error.message || 'Error interno del servidor'
         });
     }
 };
-
 
 // CRUD - Buscarsolouno
 export const Buscar = async (req, res) => {
