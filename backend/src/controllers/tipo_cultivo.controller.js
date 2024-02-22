@@ -11,13 +11,13 @@ export const Registrartipo_cultivo = async (req, res) => {
         if (result.affectedRows > 0 ) {
             res.status(200).json({
                 status:(200),
-                message:'se registro Actividad con exito',
+                message:'se registró el tipo de cultivo con exito',
                 result:result
             })
         } else {
             res.status(403).json({
                 status:(403),
-                message:'no se registro la Actividad',
+                message:'No se registro el tipo de cultivo',
             })
         }
     } catch (error) {
@@ -48,13 +48,13 @@ export const Actualizartipo_cultivo = async (req, res) => {
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se actualizó con éxito',
+                message: 'Se actualizó el tipo de cultivo con éxito',
                 result: result
             });
         } else {
             res.status(404).json({
                 status: 404,
-                message: 'No se encontró el registro para actualizar'
+                message: 'No se actualizo el tipo de cultivo'
             });
         }
     } catch (error) {
@@ -69,28 +69,36 @@ export const Actualizartipo_cultivo = async (req, res) => {
 /* Desactivar tipo_cultivo */
 export const Desactivartipo_cultivo = async (req, res) => {
     try {
-        const { id_cultivo } = req.body; 
-        const [result] = await pool.query("DELETE FROM tipo_cultivo WHERE id_cultivo = ?", [id_cultivo]); // Cambiado 'id' por 'id_tipo_actividad'
+        const { id } = req.params;
+        const { estado } = req.body;
+
+        const [tipo_cultivo] = await pool.query("SELECT * FROM tipo_cultivo WHERE id_cultivo=?", [id]);
+
+        const [result] = await pool.query(
+            `UPDATE tipo_cultivo SET estado = ${estado ? `'${estado}'` : `'${tipo_cultivo[0].estado}'`} WHERE id_cultivo=?`,
+            [id]
+        );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se desactivó con éxito',
+                message: 'Se actualizó con éxito',
                 result: result
             });
         } else {
             res.status(404).json({
                 status: 404,
-                message: 'No se encontró el tipo de cultivo para desactivar'
+                message: 'No se encontró el registro para actualizar'
             });
         }
     } catch (error) {
+        console.error("Error en la función Actualizar:", error); // Agrega este log
         res.status(500).json({
             status: 500,
-            message: error
+            message: error.message || 'Error interno del servidor'
         });
     }
-}
+};
 
 /* Buscar tipo_cultivo */
 

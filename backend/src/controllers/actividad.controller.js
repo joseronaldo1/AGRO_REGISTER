@@ -11,13 +11,13 @@ export const RegistrarActividad = async (req, res) => {
         if (result.affectedRows > 0 ) {
             res.status(200).json({
                 status:(200),
-                message:'se registro Actividad con exito',
+                message:'Se registro la Actividad con exito',
                 result:result
             })
         } else {
             res.status(403).json({
                 status:(403),
-                message:'no se registro la Actividad',
+                message:'No se registro la Actividad',
             })
         }
     } catch (error) {
@@ -67,31 +67,40 @@ export const ActualizarActividad = async (req, res) => {
 };
 
 
-/* Desactivar actividad */
+
+//desactivar
 export const DesactivarActividad = async (req, res) => {
     try {
-        const { id_actividad } = req.body; 
-        const [result] = await pool.query("DELETE FROM actividad WHERE id_actividad = ?", [id_actividad]); // Cambiado 'id' por 'id_tipo_actividad'
+        const { id } = req.params;
+        const { estado } = req.body;
+
+        const [actividad] = await pool.query("SELECT * FROM actividad WHERE id_actividad=?", [id]);
+
+        const [result] = await pool.query(
+            `UPDATE actividad SET estado = ${estado ? `'${estado}'` : `'${actividad[0].estado}'`} WHERE id_actividad=?`,
+            [id]
+        );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se desactivó con éxito',
+                message: 'Se actualizó con éxito',
                 result: result
             });
         } else {
             res.status(404).json({
                 status: 404,
-                message: 'No se encontró la actividad para desactivar'
+                message: 'No se encontró el registro para actualizar'
             });
         }
     } catch (error) {
+        console.error("Error en la función Actualizar:", error); // Agrega este log
         res.status(500).json({
             status: 500,
-            message: error
+            message: error.message || 'Error interno del servidor'
         });
     }
-}
+};
 
 /* Buscar actividad */
 
