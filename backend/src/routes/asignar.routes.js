@@ -3,7 +3,6 @@ import {
     listarAsignaciones,
     registrarAsignacion,
     editarAsignacion,
-    eliminarAsignacion,
     buscarAsignacion,
     Desactivar,
 } from "../controllers/asignar.controller.js";
