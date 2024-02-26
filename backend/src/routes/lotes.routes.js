@@ -11,4 +11,4 @@ rutasdelotes.put("/lotes/:id", Actualizar)
 rutasdelotes.get("/lotes/:id", Buscar)
 
 
-export default rutasdelotes
+export default rutasdelotes;

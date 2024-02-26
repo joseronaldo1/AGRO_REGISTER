@@ -2,13 +2,13 @@
 import { Router } from "express";
 import { RegistrarProduccion, listarProduccion, ActualizarProduccion, DesactivarProduccion, BuscarProduccion } from "../controllers/Produccion.controller.js";
 
-const rutaDeProduccion = Router()
+const rutaProduc = Router()
 
 //localhost:4000/
-rutaDeProduccion.get("/listarProduccion", listarProduccion)
-rutaDeProduccion.post("/RegistrarProduccion", RegistrarProduccion)
-rutaDeProduccion.put("/actualizarProduccion/:id", ActualizarProduccion)
-rutaDeProduccion.put("/DesactivarProduccion/Produccion/:id", DesactivarProduccion);
-rutaDeProduccion.get("/buscarProduccion/:id", BuscarProduccion);
+rutaProduc.get("/listarProduccion", listarProduccion)
+rutaProduc.post("/RegistrarProduccion", RegistrarProduccion)
+rutaProduc.put("/actualizarProduccion/:id", ActualizarProduccion)
+rutaProduc.put("/DesactivarProduccion/Produccion/:id", DesactivarProduccion);
+rutaProduc.get("/buscarProduccion/:id", BuscarProduccion);
 
-export default rutaDeProduccion;
+export default rutaProduc;

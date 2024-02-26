@@ -26,17 +26,17 @@ export const listarTodo =async (req, res)=> {
 //crud Registrar
 export const registrar = async (req, res) => {
     try {
-        const { nombre, apellidos,correo, rol, cargo, ficha_tecnica, contraseña} =req.body
+        const { nombre, apellidos,correo, rol, ficha_tecnica, contraseña} =req.body
 
         // Validar que nombre_variedad esté presente en el cuerpo de la solicitud
-        if (!nombre, !apellidos, !correo, !rol, !cargo, !ficha_tecnica, !contraseña) {
+        if (!nombre, !apellidos, !correo, !rol, !ficha_tecnica, !contraseña) {
             return res.status(400).json({
                 status: 400,
                 message: 'completa todos los campos requeridos'
             });
         }
 
-        const [result] = await pool.query("INSERT INTO usuarios (nombre, apellidos, correo, rol, cargo, ficha_tecnica, contraseña) VALUES (?, ?, ?, ?, ?, ?, ?)", [nombre, apellidos, correo, rol, cargo, ficha_tecnica, contraseña]);
+        const [result] = await pool.query("INSERT INTO usuarios (nombre, apellidos, correo, rol, ficha_tecnica, contraseña) VALUES (?, ?, ?, ?, ?, ?)", [nombre, apellidos, correo, rol, ficha_tecnica, contraseña]);
         
         if (result.affectedRows > 0) {
             res.status(200).json({
@@ -97,12 +97,12 @@ export const Desactivar = async (req, res) => {
 export const Actualizar = async (req, res) => {
     try {
         const { id } = req.params;
-        const { nombre, apellidos, correo, rol, cargo, ficha_tecnica, contraseña } = req.body;
+        const { nombre, apellidos, correo, rol, ficha_tecnica, contraseña } = req.body;
 
         const [oldusuarios] = await pool.query("SELECT * FROM usuarios WHERE id_usuario=?", [id]);
 
         const [result] = await pool.query(
-            `UPDATE usuarios SET nombre = ${nombre ? `'${nombre}'` : `'${oldusuarios[0].nombre}'`}, apellidos = ${apellidos ? `'${apellidos}'` : `'${oldusuarios[0].apellidos}'`}, correo = ${correo ? `'${correo}'` : `'${oldusuarios[0].correo}'`}, rol = ${rol ? `'${rol}'` : `'${oldusuarios[0].rol}'`}, cargo = ${cargo ? `'${cargo}'` : `'${oldusuarios[0].cargo}'`}, ficha_tecnica = ${ficha_tecnica ? `'${ficha_tecnica}'` : `'${oldusuarios[0].ficha_tecnica}'`}, contraseña = ${contraseña ? `'${contraseña}'` : `'${oldusuarios[0].contraseña}'`} WHERE id_usuario=?`,
+            `UPDATE usuarios SET nombre = ${nombre ? `'${nombre}'` : `'${oldusuarios[0].nombre}'`}, apellidos = ${apellidos ? `'${apellidos}'` : `'${oldusuarios[0].apellidos}'`}, correo = ${correo ? `'${correo}'` : `'${oldusuarios[0].correo}'`}, rol = ${rol ? `'${rol}'` : `'${oldusuarios[0].rol}'`}, ficha_tecnica = ${ficha_tecnica ? `'${ficha_tecnica}'` : `'${oldusuarios[0].ficha_tecnica}'`}, contraseña = ${contraseña ? `'${contraseña}'` : `'${oldusuarios[0].contraseña}'`} WHERE id_usuario=?`,
             [id]
         );
 
