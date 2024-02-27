@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación de la API</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Documentación de la API Actividad</h1>
+    <hr>
+    <h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR ACTIVIDAD</h3>
+    <table>
+        <tr><td>Número</td> <td>1</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Registrar Actividad</td></tr>
+        <tr><td>URL</td>  <td>/RegistrarActividad</td></tr>
+        <tr><td>Descripción</td>  <td>Permite registrar una nueva actividad en la base de datos</td></tr>
+        <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
+        <tr><td>Header</td>  <td>Null</td></tr>
+        <tr><td>Usuarios</td>  <td>Administrador, Lider</td></tr>
+        <tr><td>Request json</td>  <td>{"tiempo": "60", "observaciones": "Actividad de prueba"}</td></tr>
+        <tr><td>Respuesta json</td>  <td>	
+        Correcto: 
+        Status: 200
+        json:
+        {
+            "status: 200,"message":"Se registro la Actividad con exito"
+        }
+    <br>
+    Incorrecto:
+    
+    Status: 403
+    body:{
+        "status": 403,
+        "message" : "No se registro la Actividad"
+    }
+    <br>
+    Error: 
+    
+    Status: 500 
+    json: {
+        status: 500,
+        "message" : "Error en el sistema"
+    }
+    </td></tr>
+    <tr><td>Programador</td>  <td>Karen Viviana Diaz Guevara</td></tr>
+</table>
+<br>
+<h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR ACTIVIDAD</h3>
+<table>
+<tr><td>Número</td> <td>2</td></tr>
+<tr><td>Nombre del Servicio</td>  <td>Actualizar Actividad</td></tr>
+<tr><td>URL</td>  <td>/ActualizarActividad/:id</td></tr>
+<tr><td>Descripción</td>  <td>Permite actualizar una actividad existente en la base de datos por medio de su id</td></tr>
+<tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+<tr><td>Header</td>  <td>Null</td></tr>
+<tr><td>Usuarios</td>  <td>Administrador, Lider</td></tr>
+<tr><td>Request json</td>  <td>{"tiempo": "30", "observaciones": "Actividad actualizada"}</td></tr>
+<tr><td>Respuesta json</td>  <td>    
+Correcto: 
+Status: 200
+json:
+{
+    "status": 200,
+    "message": "Se actualizó con éxito",
+}
+<br>
+Incorrecto:
+
+Status: 404
+body:{
+"status": 404,
+"message" : "No se encontró el registro para actualizar"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+"status": 500,
+"message" : "Error interno del servidor"
+}
+</td></tr>
+<tr><td>Programador</td>  <td>Karen Viviana Diaz Guevara</td></tr>
+</table>
+
+
+<h3>Requerimiento 3. Documentacion ENDPOINT DESACTIVAR ACTIVIDAD</h3>
+<table>
+    <tr><td>Número</td> <td>3</td></tr>
+    <tr><td>Nombre del Servicio</td>  <td>Desactivar Actividad</td></tr>
+    <tr><td>URL</td>  <td>/DesactivarActividad/Actividad/:id</td></tr>
+    <tr><td>Descripción</td>  <td>Permite desactivar una actividad existente en la base de datos</td></tr>
+    <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+    <tr><td>Header</td>  <td>Null</td></tr>
+    <tr><td>Usuario</td>  <td>Administrador</td></tr>
+    <tr><td>Request json</td>  <td>{"estado": "inactivo"}</td></tr>
+    <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    {
+		"status": 200,
+		"message": "Se actualizó con éxito"
+	}
+<br>
+Incorrecto:
+
+Status: 404
+body:{
+    "status": 404,
+    "message" : "No se encontró el registro para actualizar"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+    "status": 500,
+    "message" : "Error interno del servidor"
+}
+</td></tr>
+<tr><td>Programador</td>  <td>Karen Viviana Diaz Guevara</td></tr>
+</table>
+<h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR ACTIVIDAD</h3>
+<table>
+    <tr><td>Número</td> <td>4</td></tr>
+    <tr><td>Nombre del Servicio</td>  <td>Buscar Actividad</td></tr>
+    <tr><td>URL</td>  <td>/BuscarActividad/:id</td></tr>
+    <tr><td>Descripción</td>  <td>Permite buscar una actividad en la base de datos por medio de su id</td></tr>
+    <tr><td>Método HTTP</td>  <td>GET</td></tr>
+    <tr><td>Header</td>  <td>Null</td></tr>
+    <tr><td>Usuarios</td>  <td>Administrador, Lider, Aprendiz</td></tr>
+    <tr><td>Request json</td>  <td>Null</td></tr>
+    <tr><td>Respuesta json</td>  <td>    
+    Correcto: 
+    Status: 200
+    json:
+    [
+    {
+      "id_actividad": 1,
+      "tiempo": 30,
+      "observaciones": "Actividad actualizada",
+      "fk_id_asignacion": null,
+      "fk_id_programacion": null,
+      "estado": "activo"
+    }
+  ]
+<br>
+Incorrecto:
+
+Status: 404
+body:{
+    "status": 404,
+    "message" : "No se encontraron resultados para la búsqueda."
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+    "status": 500,
+    "message" : "Error en el sistema"
+}
+</td></tr>
+<tr><td>Programador</td>  <td>Karen Viviana Diaz Guevara</td></tr>
+</table>
+
+<h3>Requerimiento 5. Documentacion ENDPOINT LISTAR ACTIVIDAD</h3>
+<table>
+    <tr><td>Número</td> <td>5</td></tr>
+    <tr><td>Nombre del Servicio</td>  <td>Listar Actividad</td></tr>
+    <tr><td>URL</td>  <td>/listarActividad</td></tr>
+    <tr><td>Descripción</td>  <td>Permite obtener una lista de todas las actividades registradas en la base de datos</td></tr>
+    <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+    <tr><td>Header</td>  <td>Null</td></tr>
+    <tr><td>Usuarios</td>  <td>Administrador, Lider, Aprendiz</td></tr>
+    <tr><td>Request json</td>  <td>Null</td></tr>
+    <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    [
+    {
+      "id_actividad": 1,
+      "tiempo": 30,
+      "observaciones": "Actividad actualizada",
+      "fk_id_asignacion": null,
+      "fk_id_programacion": null,
+      "estado": "activo"
+    },
+    {
+      "id_actividad": 2,
+      "tiempo": 60,
+      "observaciones": "Actividad Prueba",
+      "fk_id_asignacion": null,
+      "fk_id_programacion": null,
+      "estado": "activo"
+    }
+    ]
+<br>
+Incorrecto:
+
+Status: 404
+body:{
+    "status": 404,
+    "message" : "No se encontraron actividades."
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+    "status": 500,
+    "message" : "Error en el sistema"
+}
+</td></tr>
+<tr><td>Programador</td>  <td>Karen Viviana Diaz Guevara</td></tr>
+</table>
+</body>
+</html>
