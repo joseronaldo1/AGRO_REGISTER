@@ -1,7 +1,5 @@
 import { pool } from "../database/conexion.js";
 
-
-
 //listar
 export const listarTodo =async (req, res)=> {
     try {
