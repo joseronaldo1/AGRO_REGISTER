@@ -7,416 +7,366 @@
     <link rel="stylesheet" href="/documet.css">
 </head>
 <body>
-    <h1>Documentación de la API PROGRAMACION</h1>
-    <hr>
-    <h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR PROGRAMACION</h3>
-    <table>
-        <tr><td>Número</td> <td>1</td></tr>
-        <tr><td>Nombre del Servicio</td> <td>Programacion </td></tr>
-        <tr><td>URL</td>  <td>/RegistrarProgramacion</td></tr>
-        <tr><td>Descripción</td><td>Permite registrar la hora de inicio y fin de las actividades y las observaciones </td></tr>
-        <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Request json</td>  <td>{"fecha_inicio": "2023/09/02", "fecha_fin": "2024/03/032", "observaciones":"se noto cosas extrañas en el cultivo "}</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        { "status": 200,
-        "message": "registró la programación con éxito",
-        
-    <br>
-    <br>
-    Incorrecto:
-    
-    Status: 403
-    body:{
-        "status": 403,
-        "message" : "No se registró la programación."
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        status: 500,
-        "message" : "Error"
-    }
-    </td></tr>
-    </table>
-    <br>
-    <h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR PROGRAMACION</h3>
-    <tr>falts</tr>
-    <table>
-        <tr><td>Número</td> <td>2</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Actualizar Programacion</td></tr>
-        <tr><td>URL</td>  <td>/ActualizarProgramacion</td></tr>
-        <tr><td>Descripción</td>  <td>Permite actualizar una observacion  existente en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Request json</td>  <td>{"fecha_inicio": "2023/09/02", "fecha_fin": "2024/03/032", "observaciones":"se noto cosas extrañas en el cultivo "}</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        {
-            "status": 200,
-            "message": "Se actualizó  programacion con éxito",
-            "result": {
-            "fecha_inicio": "2023/09/02", 
-            "fecha_fin": "2024/03/032", 
-            "observaciones":"se noto cosas extrañas en el cultivo ""
-            }
-        }
-    <br>
-    Incorrecto:
-    
-    Status: 404
-    body:{
-        "status": 404,
-        "message" : "No se pudo actualizar la programacion."
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        "status": 500,
-        "message" : "Error"
-    }
-    </td></tr>
-    </table>
-    
-    <h3>Requerimiento 3. Documentacion ENDPOINT DESACTIVAR PROGRAMACION  </h3>
-    <table>
-        <tr><td>Número</td> <td>3</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Desactivar programacion</td></tr>
-        <tr><td>URL</td>  <td>/DesactivarProgramacion</td></tr>
-        <tr><td>Descripción</td>  <td>Permite desactivar una programacion existente en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>DELETE</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Request json</td>  <td>{"id_Programacion": 1}</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        {
-            "status": 200,
-            "message": "Se desactivó la programacion con éxito",
-            "result": {
-            "affectedRows": 1 
-            }
-        }
-    <br>
-    Incorrecto:
-    
-    Status: 404
-    body:{
-        "status": 404,
-        "message" : "No se encontró la programacion para desactivar."
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        "status": 500,
-        "message" : "Error"
-    }
-    </td></tr>
-    </table>
-    <h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR PROGRAMACION</h3>
-    <tr>falts</tr>
-    <table>
-        <tr><td>Número</td> <td>4</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Buscar Programacion</td></tr>
-        <tr><td>URL</td>  <td>/BuscarProgramacion</td></tr>
-        <tr><td>Descripción</td>  <td>Permite buscar una programacion por su nombre en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Request json</td>  <td>{"fecha_inicio": "2024-02-10"}</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        [
-            {
-                "id_Programacion": 1,
-                "fecha_inicio": "2024-02-10",
-                "observaciones": " planta quemada por el frio "
-            }
-        ]
-    <br>
-    Incorrecto:
-    
-    Status: 404
-    body:{
-        "status": 404,
-        "message" : "No se encontraron resultados para la búsqueda."
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        "status": 500,
-        "message" : "Error"
-    }
-    </td></tr>
-    </table>
-    <h3>Requerimiento 5. Documentacion ENDPOINT LISTAR PROGRAMACION</h3>
-    <table>
-        <tr><td>Número</td> <td>5</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Listar Programacion</td></tr>
-        <tr><td>URL</td>  <td>/listarProgramacion</td></tr>
-        <tr><td>Descripción</td>  <td>Permite obtener una lista de todas las programaciones  registradas en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Request json</td>  <td>Null</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        [
-            {
-                "id_Programacion": 1,
-                "fecha_inicio": "2024-02-10",
-                "observaciones": " planta quemada por el frio "
-            },
-            {
-                "id_Programacion": 4,
-                "fecha_inicio": "2023-05-06",
-                "observaciones": " planta quemada por el frio "
-            }
-        ]
-    <br>
-    Incorrecto:
-    
-    Status: 404
-    body:{
-        "status": 404,
-        "message" : "No se encontraron programaciones."
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        "status": 500,
-        "message" : "Error"
-    }
-    </td></tr>
-    </table>
-        
-    <br>
+
     <br>
     <br>
     <br>
     <h1>Documentación de la API Asignacion</h1>
     <hr>
-    <h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR Asignaciones</h3>
-    <table>
-        <tr><td>Número</td> <td>1</td></tr>
-        <tr><td>Nombre del Servicio</td> <td>Asignacion </td></tr>
-        <tr><td>URL</td>  <td>/RegistrarAsignacion</td></tr>
-        <tr><td>Descripción</td><td>Permite registrar las asignaciones requeridas a una persona </td></tr>
-        <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Request json</td>  <td>{"fecha_asignacion": "2023/09/02",}</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        { "status": 200,
-        "message": "registró la Asignacion con éxito",
-    }
-    <br>
-    <br>
-    Incorrecto:
     
-    Status: 403
-    body:{
-        "status": 403,
-        "message" : "No se registró la asignación"
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        status: 500,
-        "message" : "Error"
-    }
-    </td></tr>
+    <h3>Requerimiento 1. Documentación ENDPOINT REGISTRAR Asignaciones</h3>
+    <table border="1">
+        <tr>
+            <td>Número</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td>Nombre del Servicio</td>
+            <td>Asignacion </td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/RegistrarAsignacion</td>
+        </tr>
+        <tr>
+            <td>Descripción</td>
+            <td>Permite registrar las asignaciones requeridas a una persona </td>
+        </tr>
+        <tr>
+            <td>Método HTTP</td>
+            <td>POST</td>
+        </tr>
+        <tr>
+            <td>Header</td>
+            <td>Null</td>
+        </tr>
+        <tr>
+            <td>Request JSON</td>
+            <td>{"fecha_asignacion": "2023/09/02", "fk_id_usuario": 1, "fk_id_lote": 1, "estado": "activo"}</td>
+        </tr>
+        <tr>
+            <td>Respuesta JSON</td>
+            <td>
+                <p>Correcto:</p>
+                <p>Status: 200</p>
+                <p>JSON:</p>
+                <pre>
+                    { "status": 200,
+                    "message": "registró la Asignacion con éxito" }
+                </pre>
+                <br>
+                <br>
+                <p>Incorrecto:</p>
+                <p>Status: 403</p>
+                <p>body:</p>
+                <pre>
+                    {
+                        "status": 403,
+                        "message": "No se registró la asignación"
+                    }
+                </pre>
+                <br>
+                <p>Error:</p>
+                <p>Status: 500 </p>
+                <p>JSON:</p>
+                <pre>
+                    {
+                        status: 500,
+                        "message": "Error"
+                    }
+                </pre>
+            </td>
+        </tr>
+    </table>
+    <tr>
+    </tr>
     </table>
     <br>
     <h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR Asignacion</h3>
     <tr>falts</tr>
-    <table>
-        <tr><td>Número</td> <td>2</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Actualizar Asignacionses</td></tr>
-        <tr><td>URL</td>  <td>/ActualizarAsignacion</td></tr>
-        <tr><td>Descripción</td>  <td>Permite actualizar una Asignacion  existente en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Request json</td>  <td>{""fecha_asignacion": "2023/12/02","}</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        {
-            "status": 200,
-            "message": "Se actualizó  Asignacion con éxito",
-            "result": {
-                "id_Asignacion": 1,
-                "fk_id_usuario": "1398282"
-                "fk_lote":"3"
-                "fecha_inicio": "2024-02-10",
-            }
-        }
-    <br>
-    Incorrecto:
-    
-    Status: 404
-    body:{
-        "status": 404,
-        "message" : "No se pudo actualizar la asignación."
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        "status": 500,
-        "message" : "Error"
-    }
-    </td></tr>
+    <table border="1">
+        <tr>
+            <td>Número</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>Nombre del Servicio</td>
+            <td>Actualizar Asignaciones</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/ActualizarAsignacion</td>
+        </tr>
+        <tr>
+            <td>Descripción</td>
+            <td>Permite actualizar una Asignacion existente en la base de datos</td>
+        </tr>
+        <tr>
+            <td>Método HTTP</td>
+            <td>PUT</td>
+        </tr>
+        <tr>
+            <td>Header</td>
+            <td>Null</td>
+        </tr>
+        <tr>
+            <td>Request JSON</td>
+            <td>{"fecha_asignacion": "2023/12/02"}</td>
+        </tr>
+        <tr>
+            <td>Respuesta JSON</td>
+            <td>
+                <p>Correcto:</p>
+                <p>Status: 200</p>
+                <p>JSON:</p>
+                <pre>
+                    {
+                        "status": 200,
+                        "message": "Se actualizó Asignacion con éxito",
+                        "result": {
+                            "id_Asignacion": 1,
+                            "fk_id_usuario": "1398282",
+                            "fk_lote": "3",
+                            "fecha_inicio": "2024-02-10"
+                        }
+                    }
+                </pre>
+                <br>
+                <p>Incorrecto:</p>
+                <p>Status: 404</p>
+                <p>body:</p>
+                <pre>
+                    {
+                        "status": 404,
+                        "message": "No se pudo actualizar la asignación."
+                    }
+                </pre>
+                <br>
+                <p>Error:</p>
+                <p>Status: 500</p>
+                <p>JSON:</p>
+                <pre>
+                    {
+                        "status": 500,
+                        "message": "Error"
+                    }
+                </pre>
+            </td>
+        </tr>
     </table>
     
     <h3>Requerimiento 3. Documentacion ENDPOINT DESACTIVAR Asignacion  </h3>
-    <table>
-        <tr><td>Número</td> <td>3</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Desactivar Asignacionses</td></tr>
-        <tr><td>URL</td>  <td>/DesactivarAsignacion</td></tr>
-        <tr><td>Descripción</td>  <td>Permite desactivar una asignación existente en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>DELETE</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Request json</td>  <td>{"id_Asignacion": 1}</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        {
-            "status": 200,
-            "message": "Se desactivó la asignación con éxito",
-            "result": {
-            "affectedRows": 1 
-            }
-        }
-    <br>
-    Incorrecto:
-    
-    Status: 404
-    body:{
-        "status": 404,
-        "message" : "No se encontró la Asignacion para desactivar."
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        "status": 500,
-        "message" : "Error"
-    }
-    </td></tr>
+    <table border="1">
+        <tr>
+            <td>Número</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td>Nombre del Servicio</td>
+            <td>Desactivar Asignaciones</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/DesactivarAsignacion</td>
+        </tr>
+        <tr>
+            <td>Descripción</td>
+            <td>Permite desactivar una asignación existente en la base de datos</td>
+        </tr>
+        <tr>
+            <td>Método HTTP</td>
+            <td>DELETE</td>
+        </tr>
+        <tr>
+            <td>Header</td>
+            <td>Null</td>
+        </tr>
+        <tr>
+            <td>Request json</td>
+            <td>{"id_Asignacion": 1}</td>
+        </tr>
+        <tr>
+            <td>Respuesta json</td>
+            <td>
+                <p>Correcto:</p>
+                <p>Status: 200</p>
+                <p>JSON:</p>
+                <pre>
+                    {
+                        "status": 200,
+                        "message": "Se desactivó la asignación con éxito",
+                        "result": {
+                            "affectedRows": 1
+                        }
+                    }
+                </pre>
+                <br>
+                <p>Incorrecto:</p>
+                <p>Status: 404</p>
+                <p>body:</p>
+                <pre>
+                    {
+                        "status": 404,
+                        "message": "No se encontró la Asignacion para desactivar."
+                    }
+                </pre>
+                <br>
+                <p>Error:</p>
+                <p>Status: 500 </p>
+                <p>JSON:</p>
+                <pre>
+                    {
+                        "status": 500,
+                        "message": "Error"
+                    }
+                </pre>
+            </td>
+        </tr>
     </table>
+    <br>
     <h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR Asignacion</h3>
     <tr>falts</tr>
-    <table>
-        <tr><td>Número</td> <td>4</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Buscar asignaciones</td></tr>
-        <tr><td>URL</td>  <td>/BuscarAsignacion</td></tr>
-        <tr><td>Descripción</td>  <td>Permite buscar una asignación por su nombre en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Request json</td>  <td>{"fecha_inicio": "2024-02-10"}</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        [
-            {
-                "id_Asignacion": 1,
-                "fk_id_usuario": "1398282"
-                "fk_lote":"3"
-                "fecha_inicio": "2024-02-10",
-            }
-        ]
-    <br>
-    Incorrecto:
-    
-    Status: 404
-    body:{
-        "status": 404,
-        "message" : "No se encontraron resultados para la búsqueda."
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        "status": 500,
-        "message" : "Error"
-    }
-    </td></tr>
+    <table border="1">
+        <tr>
+            <td>Número</td>
+            <td>4</td>
+        </tr>
+        <tr>
+            <td>Nombre del Servicio</td>
+            <td>Buscar Asignaciones</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/BuscarAsignacion</td>
+        </tr>
+        <tr>
+            <td>Descripción</td>
+            <td>Permite buscar una asignación por su nombre en la base de datos</td>
+        </tr>
+        <tr>
+            <td>Método HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>Header</td>
+            <td>Null</td>
+        </tr>
+        <tr>
+            <td>Request json</td>
+            <td>{"fecha_inicio": "2024-02-10"}</td>
+        </tr>
+        <tr>
+            <td>Respuesta json</td>
+            <td>
+                <p>Correcto:</p>
+                <p>Status: 200</p>
+                <p>JSON:</p>
+                <pre>
+                    [
+                        {
+                            "id_Asignacion": 1,
+                            "fk_id_usuario": "1398282",
+                            "fk_lote": "3",
+                            "fecha_inicio": "2024-02-10"
+                        }
+                    ]
+                </pre>
+                <br>
+                <p>Incorrecto:</p>
+                <p>Status: 404</p>
+                <p>body:</p>
+                <pre>
+                    {
+                        "status": 404,
+                        "message": "No se encontraron resultados para la búsqueda."
+                    }
+                </pre>
+                <br>
+                <p>Error:</p>
+                <p>Status: 500 </p>
+                <p>JSON:</p>
+                <pre>
+                    {
+                        "status": 500,
+                        "message": "Error"
+                    }
+                </pre>
+            </td>
+        </tr>
     </table>
-    <h3>Requerimiento 5. Documentacion ENDPOINT LISTAR Asignacion</h3>
-    <table>
-        <tr><td>Número</td> <td>5</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Listar Asignacion</td></tr>
-        <tr><td>URL</td>  <td>/listarProgramacion</td></tr>
-        <tr><td>Descripción</td>  <td>Permite obtener una lista de todas las Asignacion  registradas en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Request json</td>  <td>Null</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        [
-            {
-                "id_Asignacion": 1,
-                "fk_id_usuario": "168282"
-                "fk_lote":"3"
-                "fecha_inicio": "2024-02-10",
-            },
-            {
-                "id_Asignacion": 5,
-                "fk_id_usuario": "1389282"
-                "fk_lote":"2"
-                "fecha_inicio": "2024-02-10",
-            }
-        ]
-    <br>
-    Incorrecto:
-    
-    Status: 404
-    body:{
-        "status": 404,
-        "message" : "No se encontraron Asignacion."
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        "status": 500,
-        "message" : "Error"
-    }
-    </td></tr>
+    <table border="1">
+        <tr>
+            <td>Número</td>
+            <td>5</td>
+        </tr>
+        <tr>
+            <td>Nombre del Servicio</td>
+            <td>Listar Asignaciones</td>
+        </tr>
+        <tr>
+            <td>URL</td>
+            <td>/ListarAsignacion</td>
+        </tr>
+        <tr>
+            <td>Descripción</td>
+            <td>Permite obtener una lista de todas las Asignaciones registradas en la base de datos</td>
+        </tr>
+        <tr>
+            <td>Método HTTP</td>
+            <td>GET</td>
+        </tr>
+        <tr>
+            <td>Header</td>
+            <td>Null</td>
+        </tr>
+        <tr>
+            <td>Request json</td>
+            <td>Null</td>
+        </tr>
+        <tr>
+            <td>Respuesta json</td>
+            <td>
+                <p>Correcto:</p>
+                <p>Status: 200</p>
+                <p>JSON:</p>
+                <pre>
+                    [
+                        {
+                            "id_Asignacion": 1,
+                            "fk_id_usuario": "168282",
+                            "fk_lote": "3",
+                            "fecha_inicio": "2024-02-10"
+                        },
+                        {
+                            "id_Asignacion": 5,
+                            "fk_id_usuario": "1389282",
+                            "fk_lote": "2",
+                            "fecha_inicio": "2024-02-10"
+                        }
+                    ]
+                </pre>
+                <br>
+                <p>Incorrecto:</p>
+                <p>Status: 404</p>
+                <p>body:</p>
+                <pre>
+                    {
+                        "status": 404,
+                        "message": "No se encontraron Asignaciones."
+                    }
+                </pre>
+                <br>
+                <p>Error:</p>
+                <p>Status: 500 </p>
+                <p>JSON:</p>
+                <pre>
+                    {
+                        "status": 500,
+                        "message": "Error"
+                    }
+                </pre>
+            </td>
+        </tr>
     </table>
-        
-
 
     </body>

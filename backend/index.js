@@ -1,16 +1,15 @@
-import express from'express'
-import  body_parsere from 'body-parser'
-import { RegistrarProgramacion } from './src/controllers/programarcion.controller.js'
-import { Desactivar } from './src/controllers/asignar.controller.js'
+import express from 'express';
+import body_parser from 'body-parser';
+import { rutaAsignaciones } from './src/routes/asignar.routes.js';
 
-const servidor = express()
+const servidor = express();
 
-servidor.use('/',Desactivar)
-servidor.use('/',RegistrarProgramacion)
-servidor.use(body_parsere.json())
-servidor.use(body_parsere.urlencoded({extended: false}))
+// Cambia el orden de uso de los middlewares
+servidor.use(body_parser.json());
+servidor.use(body_parser.urlencoded({ extended: false }));
 
+servidor.use(rutaAsignaciones);
 
-servidor.listen(3000, () =>{
-    console.log("esta funcionando")
-})
+servidor.listen(3000, () => {
+    console.log("Está funcionando");
+});
