@@ -18,7 +18,7 @@
         <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
         <tr><td>Usuarios</td>  <td>Administrador, Lider</td></tr>
-        <tr><td>Request json</td>  <td>{"tiempo": "60", "observaciones": "Actividad de prueba"}</td></tr>
+        <tr><td>Request json</td>  <td>{"tiempo": "60", "observaciones": "Actividad de prueba","fk_id_asignacion":1,"fk_id_programacion":1}</td></tr>
         <tr><td>Respuesta json</td>  <td>	
         Correcto: 
         Status: 200
@@ -55,7 +55,7 @@
 <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
 <tr><td>Header</td>  <td>Null</td></tr>
 <tr><td>Usuarios</td>  <td>Administrador, Lider</td></tr>
-<tr><td>Request json</td>  <td>{"tiempo": "30", "observaciones": "Actividad actualizada"}</td></tr>
+<tr><td>Request json</td>  <td>{"tiempo": "30", "observaciones": "Actividad actualizada",fk_id_asignacion:2,fk_id_programacion:2}</td></tr>
 <tr><td>Respuesta json</td>  <td>    
 Correcto: 
 Status: 200
@@ -130,7 +130,7 @@ json: {
     <tr><td>Descripción</td>  <td>Permite buscar una actividad en la base de datos por medio de su id</td></tr>
     <tr><td>Método HTTP</td>  <td>GET</td></tr>
     <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuarios</td>  <td>Administrador, Lider, Aprendiz</td></tr>
+    <tr><td>Usuarios</td>  <td>Administrador, Empleado</td></tr>
     <tr><td>Request json</td>  <td>Null</td></tr>
     <tr><td>Respuesta json</td>  <td>    
     Correcto: 

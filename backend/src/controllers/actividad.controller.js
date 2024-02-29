@@ -35,7 +35,6 @@ export const RegistrarActividad = async (req, res) => {
 
 export const ActualizarActividad = async (req, res) => {
     try {
-        
 
         const { id_actividad } = req.params;
         const { tiempo, observaciones,fk_id_asignacion,fk_id_programacion,estado } = req.body;
