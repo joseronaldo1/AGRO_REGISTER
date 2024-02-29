@@ -7,631 +7,222 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1>Documentación de la API Actividad</h1>
+    <h1>Documentación de la API Producción</h1>
+    <br>
     <hr>
-    <h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR ACTIVIDAD</h3>
+    <h3>Requerimiento 1. Documentación ENDPOINT REGISTRAR PRODUCCIÓN</h3>
     <table>
         <tr><td>Número</td> <td>1</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Registrar Actividad</td></tr>
-        <tr><td>URL</td>  <td>/RegistrarActividad</td></tr>
-        <tr><td>Descripción</td>  <td>Permite registrar una nueva actividad en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Registrar Producción</td></tr>
+        <tr><td>URL</td>  <td>/registrarProduccion</td></tr>
+        <tr><td>Descripción</td>  <td>Permite registrar una nueva producción en la base de datos</td></tr>
+        <tr><td>Método HTTP</td>  <td>POST</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Usuarios</td>  <td>Administrador, Lider</td></tr>
-        <tr><td>Request json</td>  <td>{"tiempo": "60", "observaciones": "Actividad de prueba"}</td></tr>
+        <tr><td>Usuarios</td>  <td>Administrador, Líder</td></tr>
+        <tr><td>Request json</td>  <td>{"cantidad_produccion": 100, "precio": 50, "fk_id_variedad_cultivo": 2}</td></tr>
         <tr><td>Respuesta json</td>  <td>	
         Correcto: 
         Status: 200
         json:
         {
-            "status: 200,"message":"Se registro la Actividad con exito"
+            "status": 200,
+            "message": "Se registró la producción con éxito",
+            "result": {}
         }
     <br>
     Incorrecto:
     
     Status: 403
-    body:{
+    json:
+    {
         "status": 403,
-        "message" : "No se registro la Actividad"
+        "message": "No se registró la producción"
     }
     <br>
     Error: 
     
     Status: 500 
     json: {
-        status: 500,
-        "message" : "Error en el sistema"
+        "status": 500,
+        "message": "Error en el sistema"
     }
     </td></tr>
     <tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-<br>
-<h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR ACTIVIDAD</h3>
-<table>
-<tr><td>Número</td> <td>2</td></tr>
-<tr><td>Nombre del Servicio</td>  <td>Actualizar Actividad</td></tr>
-<tr><td>URL</td>  <td>/ActualizarActividad/:id</td></tr>
-<tr><td>Descripción</td>  <td>Permite actualizar una actividad existente en la base de datos por medio de su id</td></tr>
-<tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
-<tr><td>Header</td>  <td>Null</td></tr>
-<tr><td>Usuarios</td>  <td>Administrador, Lider</td></tr>
-<tr><td>Request json</td>  <td>{"tiempo": "30", "observaciones": "Actividad actualizada"}</td></tr>
-<tr><td>Respuesta json</td>  <td>    
-Correcto: 
-Status: 200
-json:
-{
-    "status": 200,
-    "message": "Se actualizó con éxito",
-}
-<br>
-Incorrecto:
-
-Status: 404
-body:{
-"status": 404,
-"message" : "No se encontró el registro para actualizar"
-}
-<br>
-Error: 
-
-Status: 500 
-json: {
-"status": 500,
-"message" : "Error interno del servidor"
-}
-</td></tr>
-<tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-
-
-<h3>Requerimiento 3. Documentacion ENDPOINT DESACTIVAR ACTIVIDAD</h3>
-<table>
-    <tr><td>Número</td> <td>3</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>Desactivar Actividad</td></tr>
-    <tr><td>URL</td>  <td>/DesactivarActividad/Actividad/:id</td></tr>
-    <tr><td>Descripción</td>  <td>Permite desactivar una actividad existente en la base de datos</td></tr>
-    <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
-    <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuario</td>  <td>Administrador</td></tr>
-    <tr><td>Request json</td>  <td>{"estado": "inactivo"}</td></tr>
-    <tr><td>Respuesta json</td>  <td>	
-    Correcto: 
-    Status: 200
-    json:
-    {
-		"status": 200,
-		"message": "Se actualizó con éxito"
-	}
-<br>
-Incorrecto:
-
-Status: 404
-body:{
-    "status": 404,
-    "message" : "No se encontró el registro para actualizar"
-}
-<br>
-Error: 
-
-Status: 500 
-json: {
-    "status": 500,
-    "message" : "Error interno del servidor"
-}
-</td></tr>
-<tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-<h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR ACTIVIDAD</h3>
-<table>
-    <tr><td>Número</td> <td>4</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>Buscar Actividad</td></tr>
-    <tr><td>URL</td>  <td>/BuscarActividad/:id</td></tr>
-    <tr><td>Descripción</td>  <td>Permite buscar una actividad en la base de datos por medio de su id</td></tr>
-    <tr><td>Método HTTP</td>  <td>GET</td></tr>
-    <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuarios</td>  <td>Administrador, Lider, Aprendiz</td></tr>
-    <tr><td>Request json</td>  <td>Null</td></tr>
-    <tr><td>Respuesta json</td>  <td>    
-    Correcto: 
-    Status: 200
-    json:
-    [
-    {
-      "id_actividad": 1,
-      "tiempo": 30,
-      "observaciones": "Actividad actualizada",
-      "fk_id_asignacion": null,
-      "fk_id_programacion": null,
-      "estado": "activo"
-    }
-  ]
-<br>
-Incorrecto:
-
-Status: 404
-body:{
-    "status": 404,
-    "message" : "No se encontraron resultados para la búsqueda."
-}
-<br>
-Error: 
-
-Status: 500 
-json: {
-    "status": 500,
-    "message" : "Error en el sistema"
-}
-</td></tr>
-<tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-
-<h3>Requerimiento 5. Documentacion ENDPOINT LISTAR ACTIVIDAD</h3>
-<table>
-    <tr><td>Número</td> <td>5</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>Listar Actividad</td></tr>
-    <tr><td>URL</td>  <td>/listarActividad</td></tr>
-    <tr><td>Descripción</td>  <td>Permite obtener una lista de todas las actividades registradas en la base de datos</td></tr>
-    <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
-    <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuarios</td>  <td>Administrador, Lider, Aprendiz</td></tr>
-    <tr><td>Request json</td>  <td>Null</td></tr>
-    <tr><td>Respuesta json</td>  <td>	
-    Correcto: 
-    Status: 200
-    json:
-    [
-    {
-      "id_actividad": 1,
-      "tiempo": 30,
-      "observaciones": "Actividad actualizada",
-      "fk_id_asignacion": null,
-      "fk_id_programacion": null,
-      "estado": "activo"
-    },
-    {
-      "id_actividad": 2,
-      "tiempo": 60,
-      "observaciones": "Actividad Prueba",
-      "fk_id_asignacion": null,
-      "fk_id_programacion": null,
-      "estado": "activo"
-    }
-    ]
-<br>
-Incorrecto:
-
-Status: 404
-body:{
-    "status": 404,
-    "message" : "No se encontraron actividades."
-}
-<br>
-Error: 
-
-Status: 500 
-json: {
-    "status": 500,
-    "message" : "Error en el sistema"
-}
-</td></tr>
-<tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-<br>
-<hr>
-<h1>Documentación de la API Tipo_cultivo</h1>
-<br>
-<hr>
-<h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR TIPO DE CULTIVO</h3>
-<table>
-    <tr><td>Número</td> <td>1</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>Registrar Tipo de Cultivo</td></tr>
-    <tr><td>URL</td>  <td>/Registrartipo_cultivo</td></tr>
-    <tr><td>Descripción</td>  <td>Permite registrar un nuevo tipo de cultivo en la base de datos</td></tr>
-    <tr><td>Método HTTP</td>  <td>POST</td></tr>
-    <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuarios</td>  <td>Administrador, Lider</td></tr>
-    <tr><td>Request json</td>  <td>{"nombre": "Tipo de cultivo 1"}</td></tr>
-    <tr><td>Respuesta json</td>  <td>    
+    </table>
+    
+    <h3>Requerimiento 2. Documentación ENDPOINT ACTUALIZAR PRODUCCIÓN</h3>
+    <table>
+        <tr><td>Número</td> <td>2</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Actualizar Producción</td></tr>
+        <tr><td>URL</td>  <td>/actualizarProduccion/:id</td></tr>
+        <tr><td>Descripción</td>  <td>Permite actualizar la información de una producción existente en la base de datos por medio de su id</td></tr>
+        <tr><td>Método HTTP</td>  <td>PUT</td></tr>
+        <tr><td>Header</td>  <td>Null</td></tr>
+        <tr><td>Usuarios</td>  <td>Administrador, Líder</td></tr>
+        <tr><td>Request json</td>  <td>	{"cantidad_produccion": 120, "precio": 60,"fk_id_variedad_cultivo": 3}</td></tr>
+        <tr><td>Respuesta json</td>  <td>	
         Correcto: 
         Status: 200
         json:
         {
             "status": 200,
-            "message": "Se registró el tipo de cultivo con éxito"
+            "message": "Se actualizó la producción con éxito"
         }
-        <br>
-        Incorrecto:
-        
-        Status: 403
-        body:{
-            "status": 403,
-            "message" : "No se registro el tipo de cultivo"
-        }
-        <br>
-        Error: 
-        
-        Status: 500 
-        json: {
-            "status": 500,
-            "message" : "Error en el sistema"
-        }
+    <br>
+    Incorrecto:
+    
+    Status: 404
+    json:
+    {
+        "status": 404,
+        "message": "No se encontró el registro para actualizar."
+    }
+    <br>
+    Error: 
+    
+    Status: 500 
+    json: {
+        "status": 500,
+        "message": "Error en el sistema"
+    }
     </td></tr>
     <tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-
-<h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR TIPO DE CULTIVO</h3>
-<table>
-    <tr><td>Número</td> <td>2</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>Actualizar Tipo de Cultivo</td></tr>
-    <tr><td>URL</td>  <td>/Actualizartipo_cultivo/:id</td></tr>
-    <tr><td>Descripción</td>  <td>Permite actualizar un tipo de cultivo existente en la base de datos por medio de su id</td></tr>
-    <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
-    <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuarios</td>  <td>Administrador, Lider</td></tr>
-    <tr><td>Request json</td>  <td>{"id_cultivo": 1, "nombre": "Nuevo nombre del tipo de cultivo"}</td></tr>
-    <tr><td>Respuesta json</td>  <td>	
-    Correcto: 
-    Status: 200
+    </table>
+    
+    <h3>Requerimiento 3. Documentación ENDPOINT DESACTIVAR PRODUCCIÓN</h3>
+    <table>
+        <tr><td>Número</td> <td>3</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Desactivar Producción</td></tr>
+        <tr><td>URL</td>  <td>/desactivar/Produccion/:id</td></tr>
+        <tr><td>Descripción</td>  <td>Permite desactivar una producción existente en la base de datos</td></tr>
+        <tr><td>Método HTTP</td>  <td>PUT</td></tr>
+        <tr><td>Header</td>  <td>Null</td></tr>
+        <tr><td>Usuario</td>  <td>Administrador</td></tr>
+        <tr><td>Request json</td>  <td>{"estado": "inactivo"}</td></tr>
+        <tr><td>Respuesta json</td>  <td>	
+        Correcto: 
+        Status: 200
+        json:
+        {
+            "status": 200,
+            "message": "Se desactivó la producción con éxito"
+        }
+    <br>
+    Incorrecto:
+    
+    Status: 404
     json:
     {
-		"status": 200,
-		"message": "Se actualizó el tipo de cultivo con éxito",
-	}
-<br>
-Incorrecto:
-
-Status: 404
-body:{
-    "status": 404,
-    "message" : "No se actualizo el tipo de cultivo"
-}
-<br>
-Error: 
-
-Status: 500 
-json: {
-    "status": 500,
-    "message" : "Error en el sistema"
-}
-</td></tr>
-<tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-<h3>Requerimiento 3. Documentacion ENDPOINT DESACTIVAR TIPO DE CULTIVO</h3>
-<table>
-    <tr><td>Número</td> <td>3</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>Desactivar Tipo de Cultivo</td></tr>
-    <tr><td>URL</td>  <td>/Desactivartipo_cultivo/tipo_cultivo/:id</td></tr>
-    <tr><td>Descripción</td>  <td>Permite desactivar un tipo de cultivo existente en la base de datos</td></tr>
-    <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
-    <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuario</td>  <td>Administrador</td></tr>
-    <tr><td>Request json</td>  <td>{"estado": "inactivo"}</td></tr>
-    <tr><td>Respuesta json</td>  <td>	
-    Correcto: 
-    Status: 200
-    json:
-    {
-		"status": 200,
-		"message": "Se actualizó con éxito"
-	}
-<br>
-Incorrecto:
-
-Status: 404
-body:{
-    "status": 404,
-    "message" : "No se encontró el registro para actualizar"
-}
-<br>
-Error: 
-
-Status: 500 
-json: {
-    "status": 500,
-    "message" : "Error interno del servidor"
-}
-</td></tr>
-<tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-<h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR TIPO DE CULTIVO</h3>
-<table>
-    <tr><td>Número</td> <td>4</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>Buscar Tipo de Cultivo</td></tr>
-    <tr><td>URL</td>  <td>/Buscartipo_cultivo/:id</td></tr>
-    <tr><td>Descripción</td>  <td>Permite buscar tipos de cultivo en la base de datos por medio de su id</td></tr>
-    <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
-    <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuarios</td>  <td>Administrador, Lider, Aprendiz</td></tr>
-    <tr><td>Request json</td>  <td>Null</td></tr>
-    <tr><td>Respuesta json</td>  <td>	
-    Correcto: 
-    Status: 200
-    json:
-    [
-    {
-      "id_cultivo": 1,
-      "nombre": "Nuevo nombre del tipo de cultivo",
-      "estado": "inactivo"
+        "status": 404,
+        "message": "No se encontró la producción para desactivar"
     }
+    <br>
+    Error: 
+    
+    Status: 500 
+    json: {
+        "status": 500,
+        "message": "Error en el sistema"
+    }
+    </td></tr>
+    <tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
+    </table>
+    
+    <h3>Requerimiento 4. Documentación ENDPOINT BUSCAR PRODUCCIÓN</h3>
+    <table>
+        <tr><td>Número</td> <td>4</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Buscar Producción</td></tr>
+        <tr><td>URL</td>  <td>/buscarProduccion/:id</td></tr>
+        <tr><td>Descripción</td>  <td>Permite buscar una producción por su id en la base de datos</td></tr>
+        <tr><td>Método HTTP</td>  <td>GET</td></tr>
+        <tr><td>Header</td>  <td>Null</td></tr>
+        <tr><td>Usuarios</td>  <td>Administrador, Líder, Aprendiz</td></tr>
+        <tr><td>Request json</td>  <td>Null</td></tr>
+        <tr><td>Respuesta json</td>  <td>	
+        Correcto: 
+        Status: 200
+        json:
+        [
+        {
+          "id_produccion": 1,
+          "cantidad_produccion": 120,
+          "precio": 60,
+          "fk_id_variedad_cultivo": 3,
+          "estado": "inactivo"
+        }
+      ]
+    <br>
+    Incorrecto:
+    
+    Status: 404
+    json:
+    {
+        "status": 404,
+        "message": "No se encontraron resultados para la búsqueda"
+    }
+    <br>
+    Error: 
+    
+    Status: 500 
+    json: {
+        "status": 500,
+        "message": "Error en el sistema"
+    }
+    </td></tr>
+    <tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
+    </table>
+    
+    <h3>Requerimiento 5. Documentación ENDPOINT LISTAR PRODUCCIONES</h3>
+    <table>
+        <tr><td>Número</td> <td>5</td></tr>
+        <tr><td>Nombre del Servicio</td>  <td>Listar Producciones</td></tr>
+        <tr><td>URL</td>  <td>/listarProduccion</td></tr>
+        <tr><td>Descripción</td>  <td>Permite listar todas las producciones registradas en la base de datos</td></tr>
+        <tr><td>Método HTTP</td>  <td>GET</td></tr>
+        <tr><td>Header</td>  <td>Null</td></tr>
+        <tr><td>Usuarios</td>  <td>Administrador, Líder, Aprendiz</td></tr>
+        <tr><td>Request json</td>  <td>Null</td></tr>
+        <tr><td>Respuesta json</td>  <td>	
+        Correcto: 
+        Status: 200
+        json: 
+        [
+  {
+    "id_produccion": 1,
+    "cantidad_produccion": 120,
+    "precio": 60,
+    "fk_id_variedad_cultivo": 3,
+    "estado": "inactivo"
+  },
+  {
+    "id_produccion": 2,
+    "cantidad_produccion": 120,
+    "precio": 60,
+    "fk_id_variedad_cultivo": 2,
+    "estado": "inactivo"
+  }
   ]
-<br>
-Incorrecto:
-
-Status: 404
-body:{
-    "status": 404,
-    "message" : "No se encontraron resultados para la búsqueda."
-}
-<br>
-Error: 
-
-Status: 500 
-json: {
-    "status": 500,
-    "message" : "Error en el sistema"
-}
-</td></tr>
-<tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-<h3>Requerimiento 5. Documentacion ENDPOINT LISTAR TIPOS DE CULTIVO</h3>
-<table>
-    <tr><td>Número</td> <td>5</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>Listar Tipos de Cultivo</td></tr>
-    <tr><td>URL</td>  <td>/listartipo_cultivo</td></tr>
-    <tr><td>Descripción</td>  <td>Permite obtener una lista de todos los tipos de cultivo registrados en la base de datos</td></tr>
-    <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
-    <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuarios</td>  <td>Administrador, Lider, Aprendiz</td></tr>
-    <tr><td>Request json</td>  <td>Null</td></tr>
-    <tr><td>Respuesta json</td>  <td>	
-    Correcto: 
-    Status: 200
-    json:
-    [
-    {
-      "id_cultivo": 1,
-      "nombre": "Nuevo nombre del tipo de cultivo",
-      "estado": "inactivo"
-    },
-    {
-      "id_cultivo": 2,
-      "nombre": "Tipo de cultivo 1",
-      "estado": "activo"
-    }
-  ]
-<br>
-Incorrecto:
-
-Status: 404
-body:{
-    "status": 404,
-    "message" : "No hay Tipos de cultivos."
-}
-<br>
-Error: 
-
-Status: 500 
-json: {
-    "status": 500,
-    "message" : "Error en el sistema"
-}
-</td></tr>
-<tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-<br>
-<hr>
-<h1>Documentación de la API Produccion</h1>
-<br>
-<hr>
-<h3>Requerimiento 1. Documentación ENDPOINT REGISTRAR PRODUCCIÓN</h3>
-<table>
-    <tr><td>Número</td> <td>1</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>Registrar Producción</td></tr>
-    <tr><td>URL</td>  <td>/RegistrarProduccion</td></tr>
-    <tr><td>Descripción</td>  <td>Permite registrar una nueva producción en la base de datos</td></tr>
-    <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
-    <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuarios</td>  <td>Administrador, Lider</td></tr>
-    <tr><td>Request json</td>  <td>{"cantidad_produccion": 100, "precio": 50}</td></tr>
-    <tr><td>Respuesta json</td>  <td>	
-    Correcto: 
-    Status: 200
+    <br>
+    Incorrecto:
+    
+    Status: 404
     json:
     {
-        "status": 200,
-        "message": "Se registró la información con éxito"
+        "status": 404,
+        "message": "No se encontraron producciones"
     }
-<br>
-Incorrecto:
-
-Status: 403
-body:{
-    "status": 403,
-    "message" : "No se registró la información"
-}
-<br>
-Error: 
-
-Status: 500 
-json: {
-    "status": 500,
-    "message" : "Error en el sistema"
-}
-</td></tr>
-<tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-<h3>Requerimiento 2. Documentación ENDPOINT ACTUALIZAR PRODUCCIÓN</h3>
-<table>
-    <tr><td>Número</td> <td>2</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>Actualizar Producción</td></tr>
-    <tr><td>URL</td>  <td>/actualizarProduccion/:id</td></tr>
-    <tr><td>Descripción</td>  <td>Permite actualizar la información de una producción existente en la base de datos por medio de su id</td></tr>
-    <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
-    <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuarios</td>  <td>Administrador, Lider</td></tr>
-    <tr><td>Request json</td>  <td>{"id_produccion": 1, "cantidad_produccion": 120, "precio": 60}</td></tr>
-    <tr><td>Respuesta json</td>  <td>	
-    Correcto: 
-    Status: 200
-    json:
-    {
-        "status": 200,
-        "message": "Se actualizó con éxito"
+    <br>
+    Error: 
+    
+    Status: 500 
+    json: {
+        "status": 500,
+        "message": "Error en el sistema"
     }
-<br>
-Incorrecto:
-
-Status: 404
-body:{
-    "status": 404,
-    "message" : "No se encontró el registro para actualizar."
-}
-<br>
-Error: 
-
-Status: 500 
-json: {
-    "status": 500,
-    "message" : "Error en el sistema"
-}
-</td></tr>
-<tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-<h3>Requerimiento 3. Documentación ENDPOINT DESACTIVAR PRODUCCIÓN</h3>
-<table>
-    <tr><td>Número</td> <td>3</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>Desactivar Producción</td></tr>
-    <tr><td>URL</td>  <td>DesactivarProduccion/Produccion/:id</td></tr>
-    <tr><td>Descripción</td>  <td>Permite desactivar una producción existente en la base de datos</td></tr>
-    <tr><td>Mrtodo HTTP</td>  <td>PUT</td></tr>
-    <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuario</td>  <td>Administrador</td></tr>
-    <tr><td>Request json</td>  <td>{"estado": "inactivo"}</td></tr>
-    <tr><td>Respuesta json</td>  <td>	
-    Correcto: 
-    Status: 200
-    json:
-    {
-        "status": 200,
-        "message": "Se actualizó con éxito"
-    }
-<br>
-Incorrecto:
-
-Status: 404
-body:{
-    "status": 404,
-    "message" : "No se encontró el registro para actualizar"
-}
-<br>
-Error: 
-
-Status: 500 
-json: {
-    "status": 500,
-    "message" : "Error en el sistema"
-}
-</td></tr>
-<tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-<h3>Requerimiento 4. Documentación ENDPOINT BUSCAR PRODUCCIÓN</h3>
-<table>
-    <tr><td>Número</td> <td>4</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>Buscar Producción</td></tr>
-    <tr><td>URL</td>  <td>/buscarProduccion/:id</td></tr>
-    <tr><td>Descripción</td>  <td>Permite buscar una producción por su id en la base de datos</td></tr>
-    <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
-    <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuarios</td>  <td>Administrador, Lider, Aprendiz</td></tr>
-    <tr><td>Request json</td>  <td>Null</td></tr>
-    <tr><td>Respuesta json</td>  <td>	
-    Correcto: 
-    Status: 200
-    json:
-    [
-    {
-      "id_produccion": 1,
-      "fk_id_variedad_cultivo": null,
-      "cantidad_produccion": 120,
-      "precio": 60,
-      "estado": "inactivo"
-    }
-  ]
-<br>
-Incorrecto:
-
-Status: 404
-body:{
-    "status": 404,
-    "message" : "No se encontraron resultados para la búsqueda"
-}
-<br>
-Error: 
-
-Status: 500 
-json: {
-    "status": 500,
-    "message" : "Error en el sistema"
-}
-</td></tr>
-<tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
-</table>
-<h3>Requerimiento 5. Documentación ENDPOINT LISTAR PRODUCCIONES</h3>
-<table>
-    <tr><td>Número</td> <td>5</td></tr>
-    <tr><td>Nombre del Servicio</td>  <td>Listar Producciones</td></tr>
-    <tr><td>URL</td>  <td>/listarProduccion</td></tr>
-    <tr><td>Descripción</td>  <td>Permite listar todas las producciones registradas en la base de datos</td></tr>
-    <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
-    <tr><td>Header</td>  <td>Null</td></tr>
-    <tr><td>Usuarios</td>  <td>Administrador, Lider, Aprendiz</td></tr>
-    <tr><td>Request json</td>  <td>Null</td></tr>
-    <tr><td>Respuesta json</td>  <td>	
-    Correcto: 
-    Status: 200
-    json: (dependiendo del resultado de la búsqueda)
-    [
-    {
-      "id_produccion": 1,
-      "fk_id_variedad_cultivo": null,
-      "cantidad_produccion": 120,
-      "precio": 60,
-      "estado": "inactivo"
-    },
-    {
-      "id_produccion": 2,
-      "fk_id_variedad_cultivo": null,
-      "cantidad_produccion": 100,
-      "precio": 50,
-      "estado": "activo"
-    },
-    {
-      "id_produccion": 3,
-      "fk_id_variedad_cultivo": null,
-      "cantidad_produccion": 100,
-      "precio": 50,
-      "estado": "activo"
-    }
-  ]
-<br>
-Incorrecto:
-
-Status: 404
-body:{
-    "status": 404,
-    "message" : "No se encontraron producciones"
-}
-<br>
-Error: 
-
-Status: 500 
-json: {
-    "status": 500,
-    "message" : "Error en el sistema"
-}
-</td></tr>
-</table>
+    </td></tr>
+    <tr><td>Programador</td>  <td>Sergio Canacue - devsce</td></tr>
+    </table> 
+    
 
 </body>
 </html>

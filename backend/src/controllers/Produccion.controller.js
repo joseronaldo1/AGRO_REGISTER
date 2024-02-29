@@ -1,84 +1,137 @@
 import { pool } from "../database/conexion.js";
+import { validationResult } from 'express-validator';
 
-
-//crud listar
-export const listarProduccion = async (req, res) => {
-        try {
-            const [result] = await pool.query("SELECT * FROM produccion")
-            if (result.length > 0) {
-                res.status(200).json(result);
-            } else {
-                res.status(404).json({
-                    status: 404,
-                    message: 'No se encontraron producciones'
-                });
-            }
-        } catch (error) {
-            res.status(500).json({
-                status: 500,
-                message: error
-            });
-        }
-    }
-
-//crud Registrar
-export const RegistrarProduccion = async (req, res) => {
+//crud Listar
+export const ListarProduccion = async (req, res) => {
     try {
-        const { cantidad_produccion,precio } = req.body
-        const [result] = await pool.query("INSERT INTO produccion (cantidad_produccion,precio) VALUES (?, ?)", [cantidad_produccion,precio])
-        if (result.affectedRows > 0 ) {
-            res.status(200).json({
-                status:(200),
-                message:'Se registró la información con éxito',
-                result:result
-            })
+        const [result] = await pool.query("SELECT * FROM produccion")
+
+        if (result.length > 0 ) {
+            res.status(200).json(result)
         } else {
-            res.status(403).json({
-                status:(403),
-                message:'No se registró la información',
+            res.status(400).json({
+                "Mensaje":"No hay Producciones"
             })
         }
     } catch (error) {
         res.status(500).json({
-            status:500,
-            message:error
+            "Mensaje": "error en el sistema"
         })
     }
 }
+//crud Registrar
+export const RegistrarProduccion = async (req, res) => {
+    try {
+        const errors= validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json(errors);
+        }
+        const { cantidad_produccion, precio, fk_id_variedad_cultivo } = req.body;
+        
 
+        const [result] = await pool.query("INSERT INTO produccion (cantidad_produccion, precio, fk_id_variedad_cultivo) VALUES (?, ?, ?)", [cantidad_produccion, precio, fk_id_variedad_cultivo]);
+        
+        if (result.affectedRows > 0) {
+            res.status(200).json({
+                status: 200,
+                message: 'Se registró la Producción con éxito',
+                result: result 
+            });
+        } else {
+            res.status(403).json({
+                status: 403,
+                message: 'No se registró la Producción',
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            status: 500,
+            message: error.message || 'error en el sistema'
+        });
+    }
+};
+
+//crud Registrar 2
+export const Registrar = async (req, res) => {
+    try {
+        const { cantidad_produccion, precio } = req.body;
+
+        if (!cantidad_produccion, precio) {
+            return res.status(400).json({
+                status: 400,
+                message: 'El campo cantidad_produccion, precio o fk_ es requerido'
+            });
+        }
+    
+        const [result] = await pool.query("INSERT INTO variedad_cultivo (cantidad_produccion, precio) VALUES (?, ?)", [cantidad_produccion, precio]);
+        
+        if (result.affectedRows > 0) {
+            res.status(200).json({
+                status: 200,
+                message: 'Se registró la Producción con éxito',
+                result: result 
+            });
+        } else {
+            res.status(403).json({
+                status: 403,
+                message: 'No se registró la Producción',
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            status: 500,
+            message: error.message || 'error en el sistema'
+        });
+    }
+}
+
+
+//actualizar
 export const ActualizarProduccion = async (req, res) => {
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
         const { id } = req.params;
-        const { precio, cantidad_produccion } = req.body;
+        const { cantidad_produccion, precio, fk_id_variedad_cultivo } = req.body;
 
-        console.log(`ID produccion a actualizar: ${id}`);  // Agrega este log
+        // Realiza una consulta para obtener la variedad de cultivo antes de actualizarla
+        const [oldproduccion] = await pool.query("SELECT * FROM produccion WHERE id_produccion=?", [id]);
 
-        const [produccion] = await pool.query("SELECT * FROM produccion WHERE id_produccion=?", [id]);
+        if (oldproduccion.length === 0) {
+            return res.status(404).json({
+                status: 404,
+                message: 'Produccion no encontrada',
+            });
+        }
 
-        console.log("Resultado de la consulta SELECT:", produccion);  // Agrega este log
-
+        // Realiza la actualización en la base de datos
         const [result] = await pool.query(
-            `UPDATE produccion SET precio = ${precio ? `'${precio}'` : `'${produccion[0].precio}'`}, cantidad_produccion = ${cantidad_produccion ? `'${cantidad_produccion}'` : `'${produccion[0].cantidad_produccion}'`} WHERE id_produccion = ?`,
+            `UPDATE produccion 
+            SET cantidad_produccion = ${cantidad_produccion ? `'${cantidad_produccion}'` : `'${oldproduccion[0].cantidad_produccion}'`},
+            precio = ${precio ? `'${precio}'` : `'${oldproduccion[0].precio}'`},
+            fk_id_variedad_cultivo = ${fk_id_variedad_cultivo ? `'${fk_id_variedad_cultivo}'` : `'${oldproduccion[0].fk_id_variedad_cultivo}'`} 
+            WHERE id_produccion = ?`,
             [id]
         );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se actualizó con éxito',
-                result: result
+                message: 'Producción actualizada con éxito',
             });
         } else {
-            res.status(404).json({
-                status: 404,
-                message: 'No se encontró el registro para actualizar'
+            res.status(403).json({
+                status: 403,
+                message: 'No se pudo actualizar la Producción',
             });
         }
     } catch (error) {
-        console.error("Error en la función Actualizar:", error);  // Agrega este log
         res.status(500).json({
             status: 500,
-            message: error.message || 'Error interno del servidor'
+            message: error.message || 'Error en el sistema'
         });
     }
 };
@@ -89,34 +142,31 @@ export const DesactivarProduccion = async (req, res) => {
         const { id } = req.params;
         const { estado } = req.body;
 
-        const [produccion] = await pool.query("SELECT * FROM produccion WHERE id_produccion=?", [id]);
-
+        const [oldproduccion] = await pool.query("SELECT * FROM produccion WHERE id_produccion = ?", [id]); 
+        
         const [result] = await pool.query(
-            `UPDATE produccion SET estado = ${estado ? `'${estado}'` : `'${produccion[0].estado}'`} WHERE id_produccion=?`,
-            [id]
+            `UPDATE produccion SET estado = ${estado ? `'${estado}'` : `'${oldproduccion[0].estado}'`} WHERE id_produccion = ?`,[id]
         );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se actualizó con éxito',
+                message: 'Se desactivó la producción con éxito',
                 result: result
             });
         } else {
             res.status(404).json({
                 status: 404,
-                message: 'No se encontró el registro para actualizar'
+                message: 'No se encontró la producción para desactivar'
             });
         }
     } catch (error) {
-        console.error("Error en la función Actualizar:", error); // Agrega este log
         res.status(500).json({
             status: 500,
-            message: error.message || 'Error interno del servidor'
+            message: error
         });
     }
-};
-
+}
 
 // CRUD - Buscar
 export const BuscarProduccion = async (req, res) => {
@@ -135,7 +185,7 @@ export const BuscarProduccion = async (req, res) => {
     } catch (error) {
         res.status(500).json({
             status: 500,
-            message: error
+            message: "error en el sistema"
         });
     }
 }
