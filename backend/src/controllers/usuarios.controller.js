@@ -1,4 +1,5 @@
 import { pool } from "../database/conexion.js";
+import { validationResult } from 'express-validator';
 
 //listar
 export const listarTodo =async (req, res)=> {
@@ -24,6 +25,11 @@ export const listarTodo =async (req, res)=> {
 //crud Registrar
 export const registrar = async (req, res) => {
     try {
+        const errors= validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json(errors);
+        }
+
         const { nombre, apellidos,correo, rol, cargo, ficha_tecnica, contraseña} =req.body
 
         // Validar que nombre_variedad esté presente en el cuerpo de la solicitud
@@ -94,6 +100,11 @@ export const Desactivar = async (req, res) => {
 //actualizar
 export const Actualizar = async (req, res) => {
     try {
+        const errors= validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json(errors);
+        }
+
         const { id } = req.params;
         const { nombre, apellidos, correo, rol, cargo, ficha_tecnica, contraseña } = req.body;
 
