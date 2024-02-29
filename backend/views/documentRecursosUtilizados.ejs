@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentacion API</title>
+  <link rel="stylesheet" href="style.css">
+<body>
+  <hr>
+  <h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR RECURSOS-UTILIZADOS</h3>
+  <table>
+      <tr><td>Número</td> <td>1</td></tr>
+      <tr><td>Nombre del Servicio</td>  <td>REGISTRAR RECURSOS-UTILIZADOS</td></tr>
+      <tr><td>URL</td>  <td>/registrarRecursos</td></tr>
+      <tr><td>Descripción</td>  <td>Permite registrar un nuevo recurso utilizado en la base de datos</td></tr>
+      <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
+      <tr><td>Header</td>  <td>Null</td></tr>
+      <tr><td>Usuarios</td>  <td>Administrador</td></tr>
+      <tr><td>Request json</td>  <td>{
+        "cantidad": 10,
+        "fk_id_actividad": 1,
+        "fk_id_tipo_recurso": 1
+      }</td></tr>
+      <tr><td>Respuesta json</td>  <td>   
+      Correcto: 
+      Status: 200
+      json:
+  {
+      "status": 200,
+      "message": "Se registró con éxito"
+  }
+  <br>
+  Incorrecto:
+  
+  Status: 403
+  body:{
+      "status": 404,
+      "message" : "No se registró"
+  }
+  <br>
+  Error: 
+  
+  Status: 500 
+  json: {
+      "status": 500,
+      "message" : "Error en el sistema"
+  }
+  </td></tr>
+  <tr><td>Programador</td>  <td>Dario Jose Zamora V - devjdz</td></tr>
+  </table>
+  
+  
+  
+  <br>
+  
+  
+  
+  
+  <h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR RECURSOS-UTILIZADOS</h3>
+  <table>
+      <tr><td>Número</td> <td>2</td></tr>
+      <tr><td>Nombre del Servicio</td>  <td>Actualizar RECURSOS-UTILIZADOS</td></tr>
+      <tr><td>URL</td>  <td>/actualizarRecursos/:id</td></tr>
+      <tr><td>Descripción</td>  <td>Permite actualizar un recurso utilizado existente en la base de datos</td></tr>
+      <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+      <tr><td>Header</td>  <td>Null</td></tr>
+      <tr><td>Usuarios</td>  <td>Administrador</td></tr>
+      <tr><td>Request json</td>  <td>{
+        "cantidad": 10,
+        "fk_id_actividad": 1,
+        "fk_id_tipo_recurso": 1
+      }</td></tr>
+      <tr><td>Respuesta json</td>  <td>   
+      Correcto: 
+      Status: 200
+      json:
+      {
+          "status": 200,
+          "message": "Se actualizó con éxito"
+      }
+  <br>
+  Incorrecto:
+  
+  Status: 404
+  body:{
+      "status": 404,
+      "message" : "No se encontró el registro para actualizar"
+  }
+  <br>
+  Error: 
+  
+  Status: 500 
+  json: {
+      "status": 500,
+      "message" : "Error en el sistema"
+  }
+  </td></tr>
+  <tr><td>Programador</td>  <td>Dario Jose Zamora V - devjdz</td></tr>
+  </table>
+  
+  <h3>Requerimiento 3. Documentacion ENDPOINT DESACTIVAR RECURSOS-UTILIZADOS</h3>
+  <table>
+  <tr><td>Número</td> <td>3</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Desactivar RECURSOS-UTILIZADOS</td></tr>
+  <tr><td>URL</td>  <td>/desactivar/Recursos/:id</td></tr>
+  <tr><td>Descripción</td>  <td>Permite desactivar un recurso utilizado existente en la base de datos</td></tr>
+  <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Usuarios</td>  <td>Administrador</td></tr>
+  <tr><td>Request json</td>  <td>{"estado": "inactivo"}</td></tr>
+  <tr><td>Respuesta json</td>  <td>   
+  Correcto: 
+  Status: 200
+  json:
+  {
+      "status": 200,
+      "message": "Se actualizó con éxito",
+      "result": {
+      "affectedRows": 1 
+      }
+  }
+  <br>
+  Incorrecto:
+  
+  Status: 404
+  body:{
+  "status": 404,
+  "message" : "No se encontró el registro para actualizar"
+  }
+  <br>
+  Error: 
+  
+  Status: 500 
+  json: {
+  "status": 500,
+  "message" : "Error interno del servidor"
+  }
+  </td></tr>
+  <tr><td>Programador</td>  <td>Dario Jose Zamora V - devjdz</td></tr>
+  </table>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <br>
+  
+  
+  
+  
+  <h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR RECURSOS-UTILIZADOS</h3>
+  <table>
+  <tr><td>Número</td> <td>4</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Buscar RECURSOS-UTILIZADOS</td></tr>
+  <tr><td>URL</td>  <td>/buscarRecursos/:id 4</td></tr>
+  <tr><td>Descripción</td>  <td>Permite buscar un recurso utilizado por su id en la base de datos</td></tr>
+  <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Usuarios</td>  <td>Administrador, empleado</td></tr>
+  <tr><td>Request json</td>  <td>{Null}</td></tr>
+  <tr><td>Respuesta json</td>  <td>   
+  Correcto: 
+  Status: 200
+  json:
+  [
+      {
+          "id_recursos_utilizados": 4,
+          "cantidad": 2,
+          "estado": "activo",
+          "fk_id_actividad": 2,
+          "fk_id_tipo_recurso": 1
+      }
+  ]
+  <br>
+  Incorrecto:
+  
+  Status: 404
+  body:{
+  "status": 404,
+  "message" : "No se encontraron resultados para la búsqueda"
+  }
+  <br>
+  Error: 
+  
+  Status: 500 
+  json: {
+  "status": 500,
+  "message" : "error en el sistema"
+  }
+  </td></tr>
+  <tr><td>Programador</td>  <td>Dario Jose Zamora V - devjdz</td></tr>
+  </table>
+  
+  
+  
+  
+  
+  <br>
+  
+  
+  <h3>Requerimiento 5. Documentacion ENDPOINT LISTAR RECURSOS-UTILIZADOS</h3>
+  <table>
+  <tr><td>Número</td> <td>5</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Listar RECURSOS-UTILIZADOS</td></tr>
+  <tr><td>URL</td>  <td>/listarRecursos</td></tr>
+  <tr><td>Descripción</td>  <td>Permite obtener una lista de todas los recursos utilizados registrados en la base de datos</td></tr>
+  <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Usuarios</td>  <td>Administrador, empleado</td></tr>
+  <tr><td>Request json</td>  <td>Null</td></tr>
+  <tr><td>Respuesta json</td>  <td>   
+  Correcto: 
+  Status: 200
+  json:
+  [
+      {
+          "id_recursos_utilizados": 4,
+          "cantidad": 2,
+          "estado": "activo",
+          "fk_id_actividad": 1,
+          "fk_id_tipo_recurso": 2
+      },
+      {
+          "id_recursos_utilizados": 6,
+          "cantidad": 4,
+          "estado": "activo",
+          "fk_id_actividad": 2,
+          "fk_id_tipo_recurso": 3
+      },
+  ]
+  <br>
+  Incorrecto:
+  
+  Status: 404
+  body:{
+  "status": 404,
+  "message" : "No hay ninguna actividad"
+  }
+  <br>
+  Error: 
+  
+  Status: 500 
+  json: {
+  "status": 500,
+  "message" : "Error en el sistema"
+  }
+  </td></tr>
+  <tr><td>Programador</td>  <td>Dario Jose Zamora V - devjdz</td></tr>
+  </table>
+</body>
+</html>
