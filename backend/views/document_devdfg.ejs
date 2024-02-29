@@ -3,223 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentacion T_recurso / T_variedad</title>
+    <title>Documentacion Variedad Cultvo</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h1>Documentación de la API TIPO_RECURSO</h1>
-    <hr>
-    <h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR TIPO_RECURSO</h3>
-    <table>
-        <tr><td>Número</td> <td>1</td></tr>
-        <tr><td>Nombre del Servicio</td> <td>Registrar Tipo de Recurso</td></tr>
-        <tr><td>URL</td>  <td>/RegistroRecurso</td></tr>
-        <tr><td>Descripción</td>  <td>Permite registrar un nuevo Tipo de Recurso en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Usuario</td> <td>Administrador,Lider</td></tr>
-        <tr><td>Request json</td>  <td>{"nombre": "guantes", "valor": 25000}</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        { 
-            "status": 200,
-            "message": "Se registro el recurso con éxito",
-    }
-    <br>
-    Incorrecto:
     
-    Status: 403
-    body:{
-        "status": 403,
-        "message" : 'No se registró el recurso',
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        status: 500,
-        "message" : "Error en el sistema"
-    }
-    </td></tr>
-    <tr><td>Programador</td><td>Daniel F Gonzalez - devdfg</td></tr>
-    </table>
-    <br>
-    <h3>Requerimiento 2. Documentacion ENDPOINT ACTUALIZAR TIPO RECURSO</h3>
-    <table>
-        <tr><td>Número</td> <td>2</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Actualizar actividad tipo de recurso</td></tr>
-        <tr><td>URL</td>  <td>/ActualizarActividad/:id</td></tr>
-        <tr><td>Descripción</td>  <td>Permite actualizar una tipo de recurso existente en la base de datos por medio del id</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Usuario</td> <td>Adminitrador,Lider</td></tr>
-        <tr><td>Request json</td>  <td>{"nombre": "pala", "valor":24343}</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        {
-            "status": 200,
-            "message": "Se actualizó con éxito",
-        }
-    <br>
-    Incorrecto:
-    
-    Status: 404
-    body:{
-        "status": 404,
-        "message" : 'No se encontró el registro para actualizar'
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        "status": 500,
-        "message" : "Error en el sistema"
-    }
-    </td></tr>
-    <tr><td>Programador</td> <td>Daniel F Gonzalez - devdfg</td></tr>
-    </table>
-    
-    <h3>Requerimiento 3. Documentacion ENDPOINT DESACTIVAR TIPO RECURSO</h3>
-    <table>
-        <tr><td>Número</td> <td>3</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Desactivar tipo de recurso</td></tr>
-        <tr><td>URL</td>  <td>/Desactivar/Actividad/:id</td></tr>
-        <tr><td>Descripción</td>  <td>Permite desactivar un tipo de recurso existente en la base de datos por medio del id</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Usuario</td> <td>Adminitrador</td></tr>
-        <tr><td>Request json</td>  <td>{"estado": "inactivo"}</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        {
-            "status": 200,
-            "message": "Se desactivó con éxito",
-            "result": {
-            "affectedRows": 1 
-            }
-        }
-    <br>
-    Incorrecto:
-    
-    Status: 404
-    body:{
-        "status": 404,
-        "message" : "No se encontró el registro para desactivar."
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        "status": 500,
-        "message" : "Error en el sistema"
-    }
-    </td></tr>
-    <tr><td>Programador</td> <td>Daniel F Gonzalez - devdfg</td></tr>
-    </table>
-    <h3>Requerimiento 4. Documentacion ENDPOINT BUSCAR TIPO RECURSO</h3>
-    <table>
-        <tr><td>Número</td> <td>4</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Buscar Actividad</td></tr>
-        <tr><td>URL</td>  <td>/BuscarActividad/:id</td></tr>
-        <tr><td>Descripción</td>  <td>Permite buscar una actividad por su id en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Usuario</td> <td>Administrador,Lider,Aprendiz </td></tr>
-        <tr><td>Request json</td>  <td>Null </td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        [
-            {
-                "id_actividad": 1,
-                "nombre": "guantes",
-                "valor": "25000",
-                "estado": "activo"
-                "fk_id_tipo_actividad":
-            }
-        ]
-    <br>
-    Incorrecto:
-    
-    Status: 404
-    body:{
-        "status": 404,
-        "message" : "No se encontraron resultados para la búsqueda."
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        "status": 500,
-        "message" : "Error en el sistema"
-    }
-    </td></tr>
-    <tr><td>Programador</td> <td>Daniel F Gonzalez - devdfg</td></tr>
-    </table>
-    <h3>Requerimiento 5. Documentacion ENDPOINT LISTAR TIPO RECURSO</h3>
-    <table>
-        <tr><td>Número</td> <td>5</td></tr>
-        <tr><td>Nombre del Servicio</td>  <td>Listar Actividad</td></tr>
-        <tr><td>URL</td>  <td>/listarActividad</td></tr>
-        <tr><td>Descripción</td>  <td>Permite obtener una lista de todos los Tipo de Recurso registrados en la base de datos</td></tr>
-        <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
-        <tr><td>Usuarios</td> <td>Administrador,Lider,Aprendiz</td></tr>
-        <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Request json</td>  <td>Null</td></tr>
-        <tr><td>Respuesta json</td>  <td>   
-        Correcto: 
-        Status: 200
-        json:
-        [
-            {
-                "id_actividad": 1,
-                "tipo_recurso": "guante",
-                "precio": 25000,
-                "estado":"activo",
-                "fk_id_tipo_actividad":
-            },
-            {
-                "id_actividad": 2,
-                "tipo_recurso": "palo",
-                "precio": 23000,
-                "estado":"inactivo",
-                "fk_id_tipo_actividad":
-            }
-        ]
-    <br>
-    Incorrecto:
-    
-    Status: 404
-    body:{
-        "status": 404,
-        "message" : "No hay recursos"
-    }
-    <br>
-    Error: 
-    
-    Status: 500 
-    json: {
-        "status": 500,
-        "message" : "Error en el sistema"
-    }
-    </td></tr>
-    <tr><td>Programador</td> <td>Daniel F Gonzalez - devdfg</td></tr>
-    </table>
-    <br>
-    <br>
-    <br>
-    <br>
     <h1>Documentación de la API VARIEDAD_CULTIVO</h1>
     <hr>
     <h3>Requerimiento 1. Documentacion ENDPOINT REGISTRAR VARIEDAD_CULTIVO</h3>
@@ -230,8 +18,8 @@
         <tr><td>Descripción</td>  <td>Permite registrar un nuevo Tipo de Variedad de Cultivo en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Usuarios</td> <td>Administrador,Lider</td></tr>
-        <tr><td>Request json</td>  <td>{"nombre_variedad": "aguacate"}</td></tr>
+        <tr><td>Usuarios</td> <td>Administrador</td></tr>
+        <tr><td>Request json</td>  <td>{"nombre_variedad": "aguacate", "fk_tipo_cultivo":1}</td></tr>
         <tr><td>Respuesta json</td>  <td>   
         Correcto: 
         Status: 200
@@ -268,8 +56,8 @@
         <tr><td>Descripción</td>  <td>Permite actualizar una variedad de cultivo existente en la base de datos por medio de su id</td></tr>
         <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Usuario</td><td>Administrador,Lider</td></tr>
-        <tr><td>Request json</td>  <td>{"nombre_variedad":"cilantro"}</td></tr>
+        <tr><td>Usuario</td><td>Administrador</td></tr>
+        <tr><td>Request json</td>  <td>{"nombre_variedad":"cilantro","fk_tipo_cultivo":1 }</td></tr>
         <tr><td>Respuesta json</td>  <td>   
         Correcto: 
         Status: 200
@@ -346,20 +134,19 @@
         <tr><td>Descripción</td>  <td>Permite buscar una variedad de cultivo por su id en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Usuarios</td><td>Administrador,Lider,Aprendiz</td></tr>
+        <tr><td>Usuarios</td><td>Administrador,Empleador</td></tr>
         <tr><td>Request json</td>  <td>{ null}</td></tr>
         <tr><td>Respuesta json</td>  <td>   
         Correcto: 
         Status: 200
         json:
         [
-            {
-                "id_actividad": 1,
-                "nombre": "guantes",
-                "valor": "25000",
-                "estado": "activo",
-                "fk_tipo_cultivo":#
-            }
+        {
+            "id_actividad": 1,
+            "nombre_variedad": "aguacate",
+            "estado": "inactivo",
+            "fk_tipo_cultivo":1
+        },
         ]
     <br>
     Incorrecto:
@@ -388,7 +175,7 @@
         <tr><td>Descripción</td>  <td>Permite obtener una lista de todas las variedades de cultivos registradas en la base de datos</td></tr>
         <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
         <tr><td>Header</td>  <td>Null</td></tr>
-        <tr><td>Usuarios</td> <td>Administrador,Lider,Aprendiz</td></tr>
+        <tr><td>Usuarios</td> <td>Administrador,Empleador</td></tr>
         <tr><td>Request json</td>  <td>Null</td></tr>
         <tr><td>Respuesta json</td>  <td>   
         Correcto: 
@@ -399,13 +186,13 @@
                 "id_actividad": 1,
                 "nombre_variedad": "aguacate",
                 "estado": "inactivo",
-                "fk_tipo_cultivo":
+                "fk_tipo_cultivo":1
             },
             {
                 "id_actividad": 1,
                 "nombre_variedad": "cafe hass",
                 "estado": "activo",
-                "fk_tipo_cultivo":
+                "fk_tipo_cultivo":2
             }
         ]
     <br>

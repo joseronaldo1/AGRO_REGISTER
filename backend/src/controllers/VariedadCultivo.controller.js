@@ -21,16 +21,14 @@ export const listarVariedadCultivo = async (req, res) => {
 //crud Registrar
 export const RegistrarVariedadCultivo = async (req, res) => {
     try {
-        const { nombre_variedad } = req.body;
-
-        if (!nombre_variedad) {
-            return res.status(400).json({
-                status: 400,
-                message: 'El campo nombre_variedad es requerido'
-            });
+        const errors= validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json(errors);
         }
+        const { nombre_variedad, fk_tipo_cultivo } = req.body;
+        
 
-        const [result] = await pool.query("INSERT INTO variedad_cultivo (nombre_variedad) VALUES (?)", [nombre_variedad]);
+        const [result] = await pool.query("INSERT INTO variedad_cultivo (nombre_variedad, fk_tipo_cultivo) VALUES (?, ?)", [nombre_variedad, fk_tipo_cultivo]);
         
         if (result.affectedRows > 0) {
             res.status(200).json({
@@ -52,38 +50,51 @@ export const RegistrarVariedadCultivo = async (req, res) => {
     }
 }
 
-//actualizar
+
 export const ActualizarVariedadCultivo = async (req, res) => {
     try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
         const { id } = req.params;
-        const { nombre_variedad} = req.body;
+        const { nombre_variedad, fk_tipo_cultivo } = req.body;
 
-
+        // Realiza una consulta para obtener la variedad de cultivo antes de actualizarla
         const [oldVCultivo] = await pool.query("SELECT * FROM variedad_cultivo WHERE id_variedad_cultivo=?", [id]);
 
-        
+        if (oldVCultivo.length === 0) {
+            return res.status(404).json({
+                status: 404,
+                message: 'Variedad de cultivo no encontrada',
+            });
+        }
 
+        // Realiza la actualización en la base de datos
         const [result] = await pool.query(
-            `UPDATE variedad_cultivo SET nombre_variedad = ${nombre_variedad ? `'${nombre_variedad}'` : `'${oldVCultivo[0].nombre_variedad}'`} WHERE id_variedad_cultivo = ?`,[id]
+            `UPDATE variedad_cultivo 
+            SET nombre_variedad = ${nombre_variedad ? `'${nombre_variedad}'` : `'${oldVCultivo[0].nombre_variedad}'`}, 
+            fk_tipo_cultivo = ${fk_tipo_cultivo ? `'${fk_tipo_cultivo}'` : `'${oldVCultivo[0].fk_tipo_cultivo}'`} 
+            WHERE id_variedad_cultivo = ?`,
+            [id]
         );
 
         if (result.affectedRows > 0) {
             res.status(200).json({
                 status: 200,
-                message: 'Se actualizó con éxito',
-                result: result
+                message: 'Variedad de cultivo actualizada con éxito',
             });
         } else {
-            res.status(404).json({
-                status: 404,
-                message: 'No se encontró el registro para actualizar'
+            res.status(403).json({
+                status: 403,
+                message: 'No se pudo actualizar la variedad de cultivo',
             });
         }
     } catch (error) {
-        console.error("Error en la función Actualizar:", error);  // Agrega este log
         res.status(500).json({
             status: 500,
-            message: error.message || "error en el sistema"
+            message: error.message || 'Error en el sistema'
         });
     }
 };
