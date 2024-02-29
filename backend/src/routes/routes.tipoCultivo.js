@@ -3,7 +3,7 @@ import {  Registrartipo_cultivo, Actualizartipo_cultivo, Desactivartipo_cultivo,
 
 import { tipoCultivoA } from "../validate/tipoCultivo.js";
 import { tipoCultivoC } from "../validate/tipoCultivo.js";
-
+/* Rutas */
 const RutaTipoCultivo = Router();
 
 
