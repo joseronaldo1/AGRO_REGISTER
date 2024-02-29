@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentacion API</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>Documentacion de la API</h1>
+  <hr>
+  <h3>Requerimiento 6. Documentacion FINCAS</h3>
+<table>
+  <tr><td>Número</td> <td>1</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Listar Fincas</td></tr>
+  <tr><td>URI</td>  <td>/fincas/listar</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite listar las fincas registradas en la base de datos</td></tr>
+  <tr><td>Verbo HTTP</td>  <td>Verbo Get</td></tr>
+  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Request json</td>  <td> </td></tr>
+  <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    {
+      "id_finca": 1,
+      "nombre_propietario": null,
+      "nombre_propiedad": "palmiras",
+      "direccion": "vrd san francisco",
+      "dimenciones": "25 km2",
+      "divicion_por_lotes": null,
+      "limites_finca": null,
+      "fk_usuario_propiedad": null,
+      "estado": "inactivo"
+    }
+  <br>
+Incorrecto:
+
+Status: 404
+body:{
+  "status": 404
+  "message" : "No se encontraron fincas."
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+  status: 500
+  "message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+<hr> <br>
+<table>
+  <tr><td>Número</td> <td>2</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Registrar Fincas</td></tr>
+  <tr><td>URI</td>  <td>/fincas/registrar</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite registrar fincas en la base de datos</td></tr>
+  <tr><td>Verbo HTTP</td>  <td>Verbo POST</td></tr>
+  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Request json</td> <td>{
+		"nombre_propietario": "Roxana",
+		"nombre_propiedad": "Primavera",
+		"direccion": "vrd Pitas",
+		"dimenciones": "25 km2",
+		"divicion_por_lotes": 5,
+		"limites_finca": "norte: Raul, sur: Sandra, oriente: Manuel, occidente: Camila",
+		"estado": "activo"
+} </td></tr>
+  <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    {
+      "status": 200,
+      "message": "Registro exitoso de su finca"
+    }
+  <br>
+Incorrecto:
+
+Status: 404
+body:{
+  "status": 404
+  "message" : "Fallo el registro de su finca"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+  status: 500
+  "message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+<hr><br>
+<table>
+  <tr><td>Número</td> <td>3</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Desactivar Fincas</td></tr>
+  <tr><td>URI</td>  <td>/fincas/desactivar</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite desactivar fincas en la base de datos</td></tr>
+  <tr><td>Verbo HTTP</td>  <td>Verbo POST</td></tr>
+  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Request json</td>  <td> </td></tr>
+  <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    {
+      "mensaje": "Su Finca se desactivó con éxito"
+    }
+  <br>
+Incorrecto:
+
+Status: 404
+body:{
+  "status": 404
+  "mensaje": "La Finca No se pudo desactivar"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+  status: 500
+  "message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+<hr> <br>
+
+<table>
+  <tr><td>Número</td> <td>4</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Actualizar Fincas</td></tr>
+  <tr><td>URI</td>  <td>/fincas/actualizar</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite actualizar fincas en la base de datos</td></tr>
+  <tr><td>Verbo HTTP</td>  <td>Verbo PUT</td></tr>
+  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Request json</td>  <td>{
+		"nombre_propietario": "Roxana",
+		"nombre_propiedad": "Primavera",
+		"direccion": "vrd Pitas",
+		"dimenciones": "25 km2",
+		"divicion_por_lotes": 5,
+		"limites_finca": "norte: Simon, sur: Sandra, oriente: Manuel, occidente: Camila",
+		"estado": "activo"
+} </td></tr>
+  <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    {
+      "status": 200,
+      "message": "La informacion ha sido actualizada"
+    }
+  <br>
+Incorrecto:
+
+Status: 404
+body:{
+  "status": 404
+  "message": "No se pudo actualizar la información!"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+  status: 500
+  "message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+<hr> <br>
+<table>
+  <tr><td>Número</td> <td>5</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Buscar Fincas</td></tr>
+  <tr><td>URI</td>  <td>/fincas/buscar</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite buscar las fincas registradas en la base de datos</td></tr>
+  <tr><td>Verbo HTTP</td>  <td>Verbo Get</td></tr>
+  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Request json</td>  <td></td></tr>
+  <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    [
+	{
+		"id_finca": 7,
+		"nombre_propietario": "Roxana",
+		"nombre_propiedad": "Primavera",
+		"direccion": "vrd Pitas",
+		"dimenciones": "25 km2",
+		"divicion_por_lotes": "5",
+		"limites_finca": "norte: Simon, sur: Sandra, oriente: Manuel, occide",
+		"fk_usuario_propiedad": null,
+		"estado": "inactivo"
+	}
+]
+  <br>
+Incorrecto:
+
+Status: 404
+body:{
+  "status": 404
+  "message" : "No se encontraron fincas con ese ID"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+  status: 500
+  "message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+</body>
+</html>

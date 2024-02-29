@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentacion API</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>Documentacion de la API</h1>
+  <hr>
+  <h3>Requerimiento 7. Documentacion CULTIVOS</h3>
+<table>
+  <tr><td>Número</td> <td>1</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Listar Cultivos</td></tr>
+  <tr><td>URI</td>  <td>/cultivos/listar</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite listar los cultivos registradas en la base de datos</td></tr>
+  <tr><td>Verbo HTTP</td>  <td>Verbo Get</td></tr>
+  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Request json</td>  <td></td></tr>
+  <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    {
+		"id_cultivo": 1,
+		"variedad": "café especial",
+		"tipo_semilla": "rico",
+		"cantidad_arbustos": 10000,
+		"fk_propiedad": null
+	}
+  <br>
+Incorrecto:
+
+Status: 404
+body:{
+  "status": 404
+  "message" : "No se encontraron cultivos."
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+  status: 500
+  "message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+<hr> <br>
+<table>
+  <tr><td>Número</td> <td>2</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Registrar Cultivos</td></tr>
+  <tr><td>URI</td>  <td>/cultivos/registrar</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite registrar cultivos en la base de datos</td></tr>
+  <tr><td>Verbo HTTP</td>  <td>Verbo POST</td></tr>
+  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Request json</td> <td>	{
+    "variedad": "café Fausto",
+    "tipo_semilla": "Castilla",
+    "cantidad_arbustos": 12000,
+    "fk_propiedad": null
+} </td></tr>
+  <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    {
+        "status": 200,
+        "message": "Se registro el cultivo"
+    }
+  <br>
+Incorrecto:
+
+Status: 404
+body:{
+  "status": 404
+  "message" : "No se pudo registrar el cultivo"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+  status: 500
+  "message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+<hr><br>
+<table>
+  <tr><td>Número</td> <td>3</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Desactivar Cultivos</td></tr>
+  <tr><td>URI</td>  <td>/cultivos/desactivar</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite desactivar cultivos en la base de datos</td></tr>
+  <tr><td>Verbo HTTP</td>  <td>Verbo POST</td></tr>
+  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Request json</td>  <td> </td></tr>
+  <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    {
+      "mensaje": "Su Cultivo se desactivó con éxito"
+    }
+  <br>
+Incorrecto:
+
+Status: 404
+body:{
+  "status": 404
+  "mensaje": "El cultivo No se pudo desactivar"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+  status: 500
+  "message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+<hr> <br>
+
+<table>
+  <tr><td>Número</td> <td>4</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Actualizar Cultivos</td></tr>
+  <tr><td>URI</td>  <td>/cultivos/actualizar</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite actualizar cultivos en la base de datos</td></tr>
+  <tr><td>Verbo HTTP</td>  <td>Verbo PUT</td></tr>
+  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Request json</td>  <td>	{
+    "variedad": "café Liliana",
+    "tipo_semilla": "Castilla",
+    "cantidad_arbustos": 12000
+} </td></tr>
+  <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    {
+      "status": 200,
+      "message": "La informacion ha sido actualizada"
+    }
+  <br>
+Incorrecto:
+
+Status: 404
+body:{
+  "status": 404
+  "message": "No se pudo actualizar la información!"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+  status: 500
+  "message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+<hr> <br>
+<table>
+  <tr><td>Número</td> <td>5</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Buscar Cultivos</td></tr>
+  <tr><td>URI</td>  <td>/cultivos/buscar</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite buscar los cultivos registrados en la base de datos</td></tr>
+  <tr><td>Verbo HTTP</td>  <td>Verbo Get</td></tr>
+  <tr><td>Header</td>  <td>Null</td></tr>
+  <tr><td>Request json</td>  <td></td></tr>
+  <tr><td>Respuesta json</td>  <td>	
+    Correcto: 
+    Status: 200
+    json:
+    [
+	{
+		"id_cultivo": 2,
+		"variedad": "café Liliana",
+		"tipo_semilla": "Castilla",
+		"cantidad_arbustos": 12000,
+		"fk_propiedad": null
+	}
+]
+  <br>
+Incorrecto:
+
+Status: 404
+body:{
+  "status": 404
+  "message" : "No se encontró ese cultivo con ese ID"
+}
+<br>
+Error: 
+
+Status: 500 
+json: {
+  status: 500
+  "message" : "Error en el sistema"
+}
+</td></tr>
+</table>
+</body>
+</html>
